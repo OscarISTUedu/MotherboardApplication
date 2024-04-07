@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Collections.Specialized;
+using System.Diagnostics;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,5 +22,12 @@ namespace ЭВМ
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Trace.WriteLine(e);
+        }
+
+
     }
 }

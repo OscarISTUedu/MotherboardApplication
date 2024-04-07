@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Button Content="Поломка №1" HorizontalAlignment="Center" Height="43" VerticalAlignment="Top" Width="152" Click="Button_Click" Margin="0,191,0,0"/>
+        <Grid HorizontalAlignment="Center" Height="247" VerticalAlignment="Top" Width="252" Margin="0,131,0,0" Cursor="Cross"/>
+        <Button Content="О приложении" HorizontalAlignment="Center" Height="43" Margin="0,259,0,0" VerticalAlignment="Top" Width="152"  Click="Button_Click"/>
 
     </Grid>
 </Window>
