@@ -1,4 +1,6 @@
-﻿using System.Collections.Specialized;
+﻿
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Text;
 using System.Windows;
@@ -43,11 +45,23 @@ namespace ЭВМ
             int Number = int.Parse(NumberString);//преобразование в int
             switch(Number)
             {
-                case 1://часы не работают - не работает южный порт
+                case 1://
+                    Menu.Visibility = Visibility.Hidden;
+                    Begin.Visibility = Visibility.Hidden;
+                    About.Visibility = Visibility.Hidden;
+                    MotherBoardImage.Visibility = Visibility.Visible;
+                    ToolsPages.Visibility = Visibility.Visible;
+                    break;
+                case 2://часы не работают - не работает южный порт
                     //осцилограма не показывает//график не синусоидальный//Частота не 32768Гц
                     Menu.Visibility = Visibility.Hidden;
                     Begin.Visibility = Visibility.Hidden;
                     About.Visibility = Visibility.Hidden;
+                    MotherBoardImage.Visibility = Visibility.Visible;
+                    ToolsPages.Visibility = Visibility.Visible;
+
+
+
                     break;
 
 
@@ -57,7 +71,6 @@ namespace ЭВМ
 
 
     }
-
     public class MotherBoard
     {
         RTC rtc;
@@ -74,18 +87,23 @@ namespace ЭВМ
         int V;//напряжение
         int R;//сопротивление
         int A;//сила тока
-
-        
     }
 
 
+    //public class 
+   
     public static class Tools //класс для метода инициализации
     {
         public static void Init(MotherBoard board,int branching)//инициализация MotherBoard в
         {
             switch (branching) 
             {
-                case 1:////часы не работают - не работает южный порт
+                case 1:
+
+
+
+                    break;
+                case 2:////часы не работают - не работает южный порт
                     //осцилограма не показывает//график не синусоидальный//Частота не 32768Гц
 
 
@@ -98,6 +116,8 @@ namespace ЭВМ
             
             }
         }
+
+     
     }
 
 
