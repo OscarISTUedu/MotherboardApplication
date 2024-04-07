@@ -5,11 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ЭВМ"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Content="Поломка №1" HorizontalAlignment="Center" Height="43" VerticalAlignment="Top" Width="152" Click="Button_Click" Margin="0,191,0,0"/>
-        <Grid HorizontalAlignment="Center" Height="247" VerticalAlignment="Top" Width="252" Margin="0,131,0,0" Cursor="Cross"/>
-        <Button Content="О приложении" HorizontalAlignment="Center" Height="43" Margin="0,259,0,0" VerticalAlignment="Top" Width="152"  Click="Button_Click"/>
+        Title="PC Pocket Diagnostics" Height="700" Width="1200">
+    <Grid x:Name="MainRoot" Background="White">
+        <Button x:Name="Begin"  Content="Начать" HorizontalAlignment="Center" Height="85" VerticalAlignment="Top" Width="300" Click="Button_Click" Margin="0,179,0,0" FontSize="36"/>
+        <Button x:Name="About"  Content="О приложении" HorizontalAlignment="Center" Height="85" Margin="0,295,0,0" VerticalAlignment="Top" Width="300"  Click="Button_Click" FontSize="36"/>
+        <ListBox x:Name="Menu"  Visibility="Hidden" HorizontalAlignment="Center" Height="600" VerticalAlignment="Top" Width="514" Margin="0,40,0,0" HorizontalContentAlignment="Center">
+            <Button Background="AntiqueWhite" Content="Поломка №1" Height="30" Width="484" Click="Menu_Click"/>
+            <Button Background="AntiqueWhite" Content="Поломка №2" Height="30" Width="484" Click="Menu_Click"/>
+        </ListBox>
 
     </Grid>
 </Window>

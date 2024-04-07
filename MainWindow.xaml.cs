@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ЭВМ
 {
@@ -18,6 +19,8 @@ namespace ЭВМ
     /// </summary>
     public partial class MainWindow : Window
     {
+        MotherBoard AorusB450;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -25,15 +28,40 @@ namespace ЭВМ
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (sender.ToString()== "System.Windows.Controls.Button: Поломка №1")
-                Trace.WriteLine("Поломка №1");
-            if (sender.ToString() == "System.Windows.Controls.Button: О приложении")
-                Trace.WriteLine("О приложении");
-            //Trace.WriteLine(sender.ToString());
+            string Source = (string)((Button)e.OriginalSource).Content;
+            if (Source == "Начать")
+            {
+                Menu.Visibility= Visibility.Visible;
+            }
+        }
+
+        private void Menu_Click (object sender, RoutedEventArgs e) 
+        { 
+            string Source = (string)((Button)e.OriginalSource).Content;
+            string NumberString = Source.Substring(Source.Length-1);//образка названия кнопки, для выделения числа
+            int Number = int.Parse(NumberString);//преобразование в int
+            switch(Number)
+            {
+                case 1:
+                    Menu.Visibility = Visibility.Hidden;
+                    Begin.Visibility = Visibility.Hidden;
+                    About.Visibility = Visibility.Hidden;
+                    break;
 
 
+            }
         }
 
 
+
+    }
+
+    public class MotherBoard
+    {
+        MotherBoard()
+        {
+
+
+        }
     }
 }
