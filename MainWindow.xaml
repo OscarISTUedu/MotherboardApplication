@@ -9,9 +9,9 @@
     <Grid x:Name="MainRoot" Background="White">
         <Button x:Name="Begin"  Content="Начать" HorizontalAlignment="Center" Height="85" VerticalAlignment="Top" Width="300" Click="Button_Click" Margin="0,179,0,0" FontSize="36"/>
         <Button x:Name="About"  Content="О приложении" HorizontalAlignment="Center" Height="85" Margin="0,295,0,0" VerticalAlignment="Top" Width="300"  Click="Button_Click" FontSize="36"/>
-        
+
         <ListBox x:Name="Menu"  Visibility="Hidden" HorizontalAlignment="Center" Height="600" VerticalAlignment="Top" Width="514" Margin="0,40,0,0" HorizontalContentAlignment="Center">
-            <Button Background="AntiqueWhite" Content="Поломка №1" Height="30" Width="484" Click="Menu_Click"/>
+            <Button Background="AntiqueWhite" Content="Поломка №1" Height="30" Width="484"  Click="Menu_Click"/>
             <Button Background="AntiqueWhite" Content="Поломка №2" Height="30" Width="484" Click="Menu_Click"/>
         </ListBox>
         <Grid x:Name="PlayGround">
@@ -21,13 +21,23 @@
                 <ColumnDefinition>
                 </ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Image x:Name="MotherBoardImage" Grid.Column="0" Source="/MotherBoard.png" Stretch="Fill" Visibility="Hidden"> </Image>
-            <TabControl Name="ToolsPages" Grid.Column="1" Visibility="Hidden">
-                <TabItem x:Name="Multimeter" Header="Мультиметр">...</TabItem>
-                <TabItem x:Name="Oscilloscope" Header="Осцилограф">...</TabItem>
-                <TabItem x:Name="Totals" Header="Выводы">...</TabItem>
-            </TabControl>
             
+            <Image x:Name="MotherBoardImage" Grid.Column="0" Source="/MotherBoard.png" Stretch="Fill" Visibility="Hidden"></Image>
+            <TabControl Name="ToolsPages" Grid.Column="1" Visibility="Hidden">
+                <TabItem x:Name="Oscilloscope" Header="Осцилограф"  MouseLeftButtonDown="Tab_Click">...</TabItem>
+                <TabItem x:Name="Multimeter" Header="Мультиметр" MouseLeftButtonDown="Tab_Click">
+
+
+
+                </TabItem>
+                <TabItem x:Name="Totals" Header="Выводы" MouseLeftButtonDown="Tab_Click">...</TabItem>
+            </TabControl>
+
+        </Grid>
+        <Grid x:Name="Gnd">
+        <Border x:Name="leftBox"  BorderBrush="Black" HorizontalAlignment="Left" Height="328" VerticalAlignment="Top" Width="101"/>
+        <Border x:Name="middleBox" BorderBrush="Black" HorizontalAlignment="Left" Height="278" Margin="101,0,0,0" VerticalAlignment="Top" Width="70"/>
+        <Border x:Name="rightBox" BorderBrush="Black" HorizontalAlignment="Left" Height="51" Margin="171,0,0,0" VerticalAlignment="Top" Width="124"/>
         </Grid>
     </Grid>
 </Window>

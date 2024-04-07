@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Security.AccessControl;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,6 +39,13 @@ namespace ЭВМ
             }
         }
 
+
+        private void Tab_Click(object sender, RoutedEventArgs e)
+        {
+            Trace.WriteLine("1");
+        }
+
+
         private void Menu_Click (object sender, RoutedEventArgs e) 
         { 
             string Source = (string)((Button)e.OriginalSource).Content;
@@ -45,12 +53,18 @@ namespace ЭВМ
             int Number = int.Parse(NumberString);//преобразование в int
             switch(Number)
             {
-                case 1://
+                case 1://КЗ
                     Menu.Visibility = Visibility.Hidden;
                     Begin.Visibility = Visibility.Hidden;
                     About.Visibility = Visibility.Hidden;
                     MotherBoardImage.Visibility = Visibility.Visible;
                     ToolsPages.Visibility = Visibility.Visible;
+                   // if (Multimeter.IsSelected)
+                     //   Trace.WriteLine("1");
+                    //else 
+                    //{ 
+                     //   Trace.WriteLine(Multimeter.IsSelected);
+                    //}
                     break;
                 case 2://часы не работают - не работает южный порт
                     //осцилограма не показывает//график не синусоидальный//Частота не 32768Гц
