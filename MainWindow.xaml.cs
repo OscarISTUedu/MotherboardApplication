@@ -25,7 +25,13 @@ namespace ЭВМ
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Trace.WriteLine(e);
+            if (sender.ToString()== "System.Windows.Controls.Button: Поломка №1")
+                Trace.WriteLine("Поломка №1");
+            if (sender.ToString() == "System.Windows.Controls.Button: О приложении")
+                Trace.WriteLine("О приложении");
+            //Trace.WriteLine(sender.ToString());
+
+
         }
 
 
