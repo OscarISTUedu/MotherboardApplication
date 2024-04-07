@@ -14,6 +14,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace ЭВМ
 {
+    using static Tools;
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -42,7 +43,8 @@ namespace ЭВМ
             int Number = int.Parse(NumberString);//преобразование в int
             switch(Number)
             {
-                case 1:
+                case 1://часы не работают - не работает южный порт
+                    //осцилограма не показывает//график не синусоидальный//Частота не 32768Гц
                     Menu.Visibility = Visibility.Hidden;
                     Begin.Visibility = Visibility.Hidden;
                     About.Visibility = Visibility.Hidden;
@@ -58,10 +60,45 @@ namespace ЭВМ
 
     public class MotherBoard
     {
-        MotherBoard()
+        RTC rtc;
+        MotherBoard(int branching)
         {
-
+            Init(this, branching);
 
         }
     }
+
+
+    public class RTC
+    {
+        int V;//напряжение
+        int R;//сопротивление
+        int A;//сила тока
+
+        
+    }
+
+
+    public static class Tools //класс для метода инициализации
+    {
+        public static void Init(MotherBoard board,int branching)//инициализация MotherBoard в
+        {
+            switch (branching) 
+            {
+                case 1:////часы не работают - не работает южный порт
+                    //осцилограма не показывает//график не синусоидальный//Частота не 32768Гц
+
+
+
+                    break;
+            
+            
+            
+            
+            
+            }
+        }
+    }
+
+
 }
