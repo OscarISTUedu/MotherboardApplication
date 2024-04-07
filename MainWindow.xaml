@@ -21,23 +21,38 @@
                 <ColumnDefinition>
                 </ColumnDefinition>
             </Grid.ColumnDefinitions>
-            
-            <Image x:Name="MotherBoardImage" Grid.Column="0" Source="/MotherBoard.png" Stretch="Fill" Visibility="Hidden"></Image>
+
+            <Image x:Name="MotherBoardImage" Grid.Column="0" Source="/MotherBoard.png" Stretch="Fill" Visibility="Visible"></Image>
             <TabControl Name="ToolsPages" Grid.Column="1" Visibility="Hidden">
                 <TabItem x:Name="Oscilloscope" Header="Осцилограф"  MouseLeftButtonDown="Tab_Click">...</TabItem>
-                <TabItem x:Name="Multimeter" Header="Мультиметр" MouseLeftButtonDown="Tab_Click">
-
-
-
-                </TabItem>
+                <TabItem x:Name="Multimeter" Header="Мультиметр" MouseLeftButtonDown="Tab_Click"></TabItem>
                 <TabItem x:Name="Totals" Header="Выводы" MouseLeftButtonDown="Tab_Click">...</TabItem>
             </TabControl>
+            <Canvas Width="300" Margin="0,0,600,357" >
+                <Path Fill="LightPink" Stroke="LightBlue" HorizontalAlignment="Left" Height="327" Stretch="Fill" Width="300" RenderTransformOrigin="0.523,0.483" VerticalAlignment="Top" Canvas.Top="0.04">
+                    <Path.Data>
+                        <CombinedGeometry GeometryCombineMode="Union">
+                            <CombinedGeometry.Geometry1>
+                                <RectangleGeometry Rect="50,50,50,50"></RectangleGeometry>
+                            </CombinedGeometry.Geometry1>
+                            <CombinedGeometry.Geometry2>
+                                <CombinedGeometry GeometryCombineMode="Union">
+                                    <CombinedGeometry.Geometry1>
+                                        <RectangleGeometry Rect="70,70,70,70"></RectangleGeometry>
+                                    </CombinedGeometry.Geometry1>
+                                    <CombinedGeometry.Geometry2>
+                                        <RectangleGeometry Rect="10,10,10,10"></RectangleGeometry>
+                                    </CombinedGeometry.Geometry2>
+                                </CombinedGeometry>
+                            </CombinedGeometry.Geometry2>
+                        </CombinedGeometry>
+                    </Path.Data>
+
+                </Path>
+
+            </Canvas>
 
         </Grid>
-        <Grid x:Name="Gnd">
-        <Border x:Name="leftBox"  BorderBrush="Black" HorizontalAlignment="Left" Height="328" VerticalAlignment="Top" Width="101"/>
-        <Border x:Name="middleBox" BorderBrush="Black" HorizontalAlignment="Left" Height="278" Margin="101,0,0,0" VerticalAlignment="Top" Width="70"/>
-        <Border x:Name="rightBox" BorderBrush="Black" HorizontalAlignment="Left" Height="51" Margin="171,0,0,0" VerticalAlignment="Top" Width="124"/>
-        </Grid>
+
     </Grid>
 </Window>

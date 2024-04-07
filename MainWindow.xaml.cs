@@ -59,6 +59,9 @@ namespace ЭВМ
                     About.Visibility = Visibility.Hidden;
                     MotherBoardImage.Visibility = Visibility.Visible;
                     ToolsPages.Visibility = Visibility.Visible;
+                    //leftBox.Focusable = true;
+                    //middleBox.Focusable = true;
+                    //rightBox.Focusable = true;
                    // if (Multimeter.IsSelected)
                      //   Trace.WriteLine("1");
                     //else 
