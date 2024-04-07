@@ -10,6 +10,9 @@
 
   <ItemGroup>
     <None Remove="MotherBoard.png" />
+    <None Remove="MultimimeterPinBlack.png" />
+    <None Remove="MultimimeterPins.png" />
+    <None Remove="MultimimeterRedPin.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +26,8 @@
 
   <ItemGroup>
     <Resource Include="MotherBoard.png" />
+    <Resource Include="MultimimeterPinBlack.png" />
+    <Resource Include="MultimimeterRedPin.png" />
   </ItemGroup>
 
   
