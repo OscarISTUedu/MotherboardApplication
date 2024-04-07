@@ -40,9 +40,27 @@ namespace ЭВМ
         }
 
 
-        private void Tab_Click(object sender, RoutedEventArgs e)
+        private void GND_Click(object sender, RoutedEventArgs e)
         {
-            Trace.WriteLine("1");
+            //string Source = (string)((Button)e.OriginalSource).Name;
+            
+        }
+
+
+        public void Tab_Click(object sender, RoutedEventArgs e)
+        {
+            string Source = (string)((TextBlock)e.OriginalSource).Text;
+            if (Source=="Мультиметр")
+            {
+
+            }
+            else if (Source== "Осцилограф")
+            {
+
+            }
+
+            Trace.WriteLine(Source);
+
         }
 
 

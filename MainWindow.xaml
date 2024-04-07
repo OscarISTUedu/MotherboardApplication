@@ -16,42 +16,36 @@
         </ListBox>
         <Grid x:Name="PlayGround">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*">
-                </ColumnDefinition>
-                <ColumnDefinition>
-                </ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
-            <Image x:Name="MotherBoardImage" Grid.Column="0" Source="/MotherBoard.png" Stretch="Fill" Visibility="Visible"></Image>
-            <TabControl Name="ToolsPages" Grid.Column="1" Visibility="Hidden">
-                <TabItem x:Name="Oscilloscope" Header="Осцилограф"  MouseLeftButtonDown="Tab_Click">...</TabItem>
-                <TabItem x:Name="Multimeter" Header="Мультиметр" MouseLeftButtonDown="Tab_Click"></TabItem>
-                <TabItem x:Name="Totals" Header="Выводы" MouseLeftButtonDown="Tab_Click">...</TabItem>
+          
+            <Image x:Name="MotherBoardImage" Grid.Column="0" Source="/MotherBoard.png" Stretch="Fill" Visibility="Hidden"></Image>
+            <TabControl  Name="ToolsPages" Grid.Column="1" Visibility="Visible">
+                <TabItem x:Name="Oscilloscope" Grid.Row="0" Header="Осцилограф"  MouseLeftButtonUp="Tab_Click">...</TabItem>
+                <TabItem x:Name="Multimeter" Grid.Row="0" Header="Мультиметр" MouseLeftButtonUp="Tab_Click">...</TabItem>
+                <TabItem x:Name="Totals" Grid.Row="0" Header="Выводы" MouseLeftButtonUp="Tab_Click">...</TabItem>
+                <CheckBox Height="20" Grid.Row="1" Content="Неотмечено"> </CheckBox>
             </TabControl>
-            <Canvas Width="300" Margin="0,0,600,357" >
-                <Path Fill="LightPink" Stroke="LightBlue" HorizontalAlignment="Left" Height="327" Stretch="Fill" Width="300" RenderTransformOrigin="0.523,0.483" VerticalAlignment="Top" Canvas.Top="0.04">
-                    <Path.Data>
-                        <CombinedGeometry GeometryCombineMode="Union">
-                            <CombinedGeometry.Geometry1>
-                                <RectangleGeometry Rect="50,50,50,50"></RectangleGeometry>
-                            </CombinedGeometry.Geometry1>
-                            <CombinedGeometry.Geometry2>
-                                <CombinedGeometry GeometryCombineMode="Union">
-                                    <CombinedGeometry.Geometry1>
-                                        <RectangleGeometry Rect="70,70,70,70"></RectangleGeometry>
-                                    </CombinedGeometry.Geometry1>
-                                    <CombinedGeometry.Geometry2>
-                                        <RectangleGeometry Rect="10,10,10,10"></RectangleGeometry>
-                                    </CombinedGeometry.Geometry2>
-                                </CombinedGeometry>
-                            </CombinedGeometry.Geometry2>
-                        </CombinedGeometry>
-                    </Path.Data>
-
-                </Path>
-
-            </Canvas>
-
+            
+            <Grid x:Name="GND" HorizontalAlignment="Left" Height="327" VerticalAlignment="Top" Width="295" Margin="1,1,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="1.86*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.67*"></RowDefinition>
+                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="0.63*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Rectangle x:Name="gnd1" Fill="AliceBlue" Grid.Column="0" Grid.Row="0" StrokeThickness="0" Opacity="0"></Rectangle>
+                <Rectangle x:Name="gnd2" Fill="AliceBlue" Grid.Column="1" Grid.Row="0" StrokeThickness="0" Opacity="0"></Rectangle>
+                <Rectangle x:Name="gnd3" Fill="AliceBlue" Grid.Column="2" Grid.Row="0" StrokeThickness="0" Opacity="0"></Rectangle>
+                <Rectangle x:Name="gnd4" Fill="AliceBlue" Grid.Column="0" Grid.Row="1" StrokeThickness="0" Opacity="0"></Rectangle>
+                <Rectangle x:Name="gnd5" Fill="AliceBlue" Grid.Column="0" Grid.Row="2" StrokeThickness="0" Opacity="0"></Rectangle>
+                <Rectangle x:Name="gnd6" Fill="AliceBlue" Grid.Column="1" Grid.Row="1" StrokeThickness="0" Opacity="0"></Rectangle>
+                </Grid>
         </Grid>
 
     </Grid>
