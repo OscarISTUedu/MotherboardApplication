@@ -49,19 +49,27 @@ namespace ЭВМ
 
         public void Tab_Click(object sender, RoutedEventArgs e)
         {
-            string Source = (string)((TextBlock)e.OriginalSource).Text;
-            if (Source=="Мультиметр")
+            string Source = "";
+            try 
+            {
+            Source = (string)((TextBlock)e.OriginalSource).Text;
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+            if (Source == "Мультиметр")
             {
 
             }
-            else if (Source== "Осцилограф")
+            else if (Source == "Осцилограф")
             {
 
             }
 
             Trace.WriteLine(Source);
 
-        }
+            }
 
 
         private void Menu_Click (object sender, RoutedEventArgs e) 

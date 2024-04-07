@@ -21,29 +21,21 @@
             </Grid.ColumnDefinitions>
           
             <Image x:Name="MotherBoardImage" Grid.Column="0" Source="/MotherBoard.png" Stretch="Fill" Visibility="Hidden"></Image>
-            <TabControl  Name="ToolsPages" Grid.Column="1" Visibility="Visible">
-                <TabItem x:Name="Oscilloscope" Grid.Row="0" Header="Осцилограф"  MouseLeftButtonUp="Tab_Click">
-                    <TabItem.Content>
-                        <StackPanel>
-                              
-                        </StackPanel>
-                    </TabItem.Content>
+            <TabControl  Name="ToolsPages" Grid.Column="1" Visibility="Hidden">
+                <TabItem x:Name="Oscilloscope" Header="Осцилограф"  MouseLeftButtonUp="Tab_Click">
+                    
                 </TabItem>
 
-                <TabItem x:Name="Multimeter" Grid.Row="0" Header="Мультиметр" MouseLeftButtonUp="Tab_Click">
+                <TabItem x:Name="Multimeter" Header="Мультиметр" MouseLeftButtonUp="Tab_Click">
                     <TabItem.Content>
                         <StackPanel>
-                            <Grid >
-                                
-                            </Grid>
                             <CheckBox Height="30" Content="Плюс"></CheckBox>
                             <CheckBox Height="30" Content="Минус"></CheckBox>
                         </StackPanel>
                     </TabItem.Content>
                 </TabItem>
-                
-                <TabItem x:Name="Totals" Grid.Row="0" Header="Выводы" MouseLeftButtonUp="Tab_Click">...</TabItem>
-                <CheckBox Height="20" Grid.Row="1" Content="Неотмечено"> </CheckBox>
+
+                <TabItem x:Name="Totals"  Header="Выводы" MouseLeftButtonUp="Tab_Click"></TabItem>
             </TabControl>
             
             <Grid x:Name="GND" HorizontalAlignment="Left" Height="327" VerticalAlignment="Top" Width="295" Margin="1,1,0,0">
