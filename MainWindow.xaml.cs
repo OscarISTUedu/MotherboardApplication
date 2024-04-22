@@ -40,12 +40,42 @@ namespace ЭВМ
         }
 
 
-        private void GND_Click(object sender, RoutedEventArgs e)
-        {
-            //string Source = (string)((Button)e.OriginalSource).Name;
+        
+            /*if (((bool)Minus.IsChecked) && (GndButton.IsFocused))
+            {
+                GndShadow.Opacity = 1;
+                GndButton.Opacity = 1;
+                *//*Mouse.OverrideCursor = Cursors.Hand;*//*
+            }*/
             
+        
+
+
+        private void GndClick(object sender, RoutedEventArgs e)//обработка всех областей
+        {
+
+            Trace.WriteLine("gnd");
+            /*Trace.WriteLine("eeeee");*/
+            if ((bool)Minus.IsChecked)//обработка выделения GND
+            {
+                GndButton.Opacity = 1;
+                Minus.IsChecked = false;
+                /*Trace.WriteLine("eeeee");*/
+            }
         }
 
+        private void UsbClick(object sender, RoutedEventArgs e)//обработка всех областей
+        {
+
+            Trace.WriteLine("usb");
+            /*Trace.WriteLine("eeeee");*/
+            if ((bool)Plus.IsChecked)//обработка выделения GND
+            {
+                UsbButton.Opacity = 1;
+                Plus.IsChecked = false;
+                /*Trace.WriteLine("eeeee");*/
+            }
+        }
 
         public void Tab_Click(object sender, RoutedEventArgs e)
         {
@@ -72,7 +102,7 @@ namespace ЭВМ
             }
 
 
-        private void Menu_Click (object sender, RoutedEventArgs e) 
+        private void Menu_Click (object sender, RoutedEventArgs e)//меню выбора неисправности
         { 
             string Source = (string)((Button)e.OriginalSource).Content;
             string NumberString = Source.Substring(Source.Length-1);//образка названия кнопки, для выделения числа
@@ -85,14 +115,12 @@ namespace ЭВМ
                     About.Visibility = Visibility.Hidden;
                     MotherBoardImage.Visibility = Visibility.Visible;
                     ToolsPages.Visibility = Visibility.Visible;
-                    //leftBox.Focusable = true;
-                    //middleBox.Focusable = true;
-                    //rightBox.Focusable = true;
-                   // if (Multimeter.IsSelected)
-                     //   Trace.WriteLine("1");
+                    
+                    // if (Multimeter.IsSelected)
+                    //   Trace.WriteLine("1");
                     //else 
                     //{ 
-                     //   Trace.WriteLine(Multimeter.IsSelected);
+                    //   Trace.WriteLine(Multimeter.IsSelected);
                     //}
                     break;
                 case 2://часы не работают - не работает южный порт
@@ -111,8 +139,10 @@ namespace ЭВМ
             }
         }
 
+        private void ClickArea_Click(object sender, RoutedEventArgs e)
+        {
 
-
+        }
     }
     public class MotherBoard
     {

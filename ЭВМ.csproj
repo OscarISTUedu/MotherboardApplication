@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="AorusB450Elite.jpg" />
     <None Remove="MotherBoard.png" />
     <None Remove="MultimimeterPinBlack.png" />
     <None Remove="MultimimeterPins.png" />
@@ -25,11 +26,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="AorusB450Elite.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="MotherBoard.png" />
     <Resource Include="MultimimeterPinBlack.png" />
     <Resource Include="MultimimeterRedPin.png" />
   </ItemGroup>
 
-  
+	
 
 </Project>

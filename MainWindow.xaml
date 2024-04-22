@@ -6,6 +6,37 @@
         xmlns:local="clr-namespace:ЭВМ"
         mc:Ignorable="d"
         Title="PC Pocket Diagnostics" Height="800" Width="1200">
+    <Window.Resources>
+        <!-- создан свой стиль кнопки чтобы при наведении она не подсвечивалась -->
+        <Style x:Key="MyButtonStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border"
+						BorderThickness="1"
+						Padding="0"
+						BorderBrush="DarkGray"
+						CornerRadius="3"
+						Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <!--<ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="white"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>-->
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+
+
+
+
     <Grid x:Name="MainRoot" Background="White">
         <Button x:Name="Begin"  Content="Начать" HorizontalAlignment="Center" Height="85" VerticalAlignment="Top" Width="300" Click="Button_Click" Margin="0,179,0,0" FontSize="36"/>
         <Button x:Name="About"  Content="О приложении" HorizontalAlignment="Center" Height="85" Margin="0,295,0,0" VerticalAlignment="Top" Width="300"  Click="Button_Click" FontSize="36"/>
@@ -19,11 +50,12 @@
                 <ColumnDefinition Width="3*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-          
-            <Image x:Name="MotherBoardImage" Grid.Column="0" Source="/MotherBoard.png" Stretch="Fill" Visibility="Hidden"></Image>
-            <TabControl  Name="ToolsPages" Grid.Column="1" Visibility="Hidden">
+
+            <Image x:Name="MotherBoardImage" Grid.Column="0" Source="/AorusB450Elite.jpg" Stretch="Fill" Visibility="Visible"></Image>
+            <!--<Button x:Name="ClickArea" Style="{StaticResource MyButtonStyle}" Background="Blue" Opacity="0" Click="Area_Click" Focusable="True" ></Button>-->
+            <TabControl  Name="ToolsPages" Grid.Column="1" Visibility="Visible">
                 <TabItem x:Name="Oscilloscope" Header="Осцилограф"  MouseLeftButtonUp="Tab_Click">
-                    
+
                 </TabItem>
 
                 <TabItem x:Name="Multimeter" Header="Мультиметр" MouseLeftButtonUp="Tab_Click">
@@ -44,8 +76,8 @@
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition Height="0.2*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                            <CheckBox Grid.Row="7" Grid.Column="0" Height="30" Content="Плюс" HorizontalAlignment="Center"></CheckBox>
-                            <CheckBox Grid.Row="7" Grid.Column="1" Height="30" Content="Минус" HorizontalAlignment="Center"></CheckBox>
+                                <CheckBox x:Name="Plus"  IsChecked="False" Grid.Row="7" Grid.Column="0" Height="30" Content="Плюс" HorizontalAlignment="Center"  ></CheckBox>
+                                <CheckBox x:Name="Minus" IsChecked="False" Grid.Row="7" Grid.Column="1" Height="30" Content="Минус" HorizontalAlignment="Center"></CheckBox>
                                 <Grid x:Name="NumbersVoltage"  Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalAlignment="Center" >
                                     <StackPanel  Orientation="Horizontal" Margin="2">
                                         <TextBlock Opacity="0.6" Foreground="Red" FontSize="39" Text="{Binding Min, FallbackValue=0, StringFormat=00}" FontFamily="DSEG7 Classic Mini" ></TextBlock>
@@ -53,7 +85,7 @@
                                         <TextBlock Opacity="0.6" Foreground="Red" FontSize="39" Text="{Binding Sec, FallbackValue=00, StringFormat=00}" FontFamily="DSEG7 Classic Mini" />
                                     </StackPanel>
                                 </Grid>
-                                <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" > Напряжение(В)</TextBox>
+                                <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" >Напряжение(В)</TextBox>
                                 <Grid x:Name="NumbersAmpers" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalAlignment="Center">
                                     <StackPanel  Orientation="Horizontal" Margin="2">
                                         <TextBlock Opacity="0.6" Foreground="Red" FontSize="39" Text="{Binding Min, FallbackValue=0, StringFormat=00}" FontFamily="DSEG7 Classic Mini" ></TextBlock>
@@ -61,7 +93,7 @@
                                         <TextBlock Opacity="0.6" Foreground="Red" FontSize="39" Text="{Binding Sec, FallbackValue=00, StringFormat=00}" FontFamily="DSEG7 Classic Mini" ></TextBlock>
                                     </StackPanel>
                                 </Grid>
-                                <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" > Сила Тока(А)</TextBox>
+                                <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" >Сила Тока(А)</TextBox>
                                 <Grid x:Name="NumberResistance" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalAlignment="Center">
                                     <StackPanel  Orientation="Horizontal" Margin="2">
                                         <TextBlock Opacity="0.6" Foreground="Red" FontSize="39" Text="{Binding Min, FallbackValue=0, StringFormat=00}" FontFamily="DSEG7 Classic Mini" ></TextBlock>
@@ -69,7 +101,7 @@
                                         <TextBlock Opacity="0.6" Foreground="Red" FontSize="39" Text="{Binding Sec, FallbackValue=00, StringFormat=00}" FontFamily="DSEG7 Classic Mini" ></TextBlock>
                                     </StackPanel>
                                 </Grid>
-                                <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" > Сопротивление(Ом)</TextBox>
+                                <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" >Сопротивление(Ом)</TextBox>
                                 <Rectangle Grid.Column="0" Grid.Row="6" StrokeThickness="2">
                                     <Rectangle.Fill>
                                         <ImageBrush ImageSource="/MultimimeterRedPin.png"/>
@@ -88,25 +120,16 @@
 
                 <TabItem x:Name="Totals"  Header="Выводы" MouseLeftButtonUp="Tab_Click"></TabItem>
             </TabControl>
-            
-            <Grid x:Name="GND" HorizontalAlignment="Left" Height="327" VerticalAlignment="Top" Width="295" Margin="1,1,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="1.86*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.67*"></RowDefinition>
-                    <RowDefinition Height="3*"></RowDefinition>
-                    <RowDefinition Height="0.63*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Rectangle x:Name="gnd1" Fill="AliceBlue" Grid.Column="0" Grid.Row="0" StrokeThickness="0" Opacity="0"></Rectangle>
-                <Rectangle x:Name="gnd2" Fill="AliceBlue" Grid.Column="1" Grid.Row="0" StrokeThickness="0" Opacity="0"></Rectangle>
-                <Rectangle x:Name="gnd3" Fill="AliceBlue" Grid.Column="2" Grid.Row="0" StrokeThickness="0" Opacity="0"></Rectangle>
-                <Rectangle x:Name="gnd4" Fill="AliceBlue" Grid.Column="0" Grid.Row="1" StrokeThickness="0" Opacity="0"></Rectangle>
-                <Rectangle x:Name="gnd5" Fill="AliceBlue" Grid.Column="0" Grid.Row="2" StrokeThickness="0" Opacity="0"></Rectangle>
-                <Rectangle x:Name="gnd6" Fill="AliceBlue" Grid.Column="1" Grid.Row="1" StrokeThickness="0" Opacity="0"></Rectangle>
-                </Grid>
+
+            <Grid x:Name="GND" HorizontalAlignment="Left" Height="401" VerticalAlignment="Top" Width="86" Margin="17,7.6,0,0"  >
+                <Button x:Name="GndButton" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="GndClick" Content="GND" FontSize="22" Foreground="LightGray"></Button>
+            </Grid>
+            <Grid x:Name="USB1" HorizontalAlignment="Left" Height="22" VerticalAlignment="Bottom" Width="59" Margin="478,16,0,11">
+                <Button x:Name="UsbButton" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="UsbClick" Content="USB1" FontSize="5" Foreground="LightGray" Margin="0,0,0,0"  />
+
+
+            </Grid>
+
         </Grid>
 
     </Grid>
