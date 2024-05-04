@@ -21,9 +21,12 @@ namespace ЭВМ
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+
     public partial class MainWindow : Window
     {
         MotherBoard AorusB450;
+        List<Button> compare = new List<Button>();
+        //массив выделенных объектов
 
         public MainWindow()
         {
@@ -40,40 +43,28 @@ namespace ЭВМ
         }
 
 
-        
-            /*if (((bool)Minus.IsChecked) && (GndButton.IsFocused))
-            {
-                GndShadow.Opacity = 1;
-                GndButton.Opacity = 1;
-                *//*Mouse.OverrideCursor = Cursors.Hand;*//*
-            }*/
-            
-        
-
-
         private void GndClick(object sender, RoutedEventArgs e)//обработка всех областей
         {
 
-            Trace.WriteLine("gnd");
-            /*Trace.WriteLine("eeeee");*/
-            if ((bool)Minus.IsChecked)//обработка выделения GND
+            if ((bool)Minus.IsChecked  /*и массив не пустой*/ )//обработка выделения GND
             {
                 GndButton.Opacity = 1;
                 Minus.IsChecked = false;
-                /*Trace.WriteLine("eeeee");*/
+                /*compare.Add(GndButton);*/
+                //добавил в массив объект
+                //запуски функции 
             }
         }
 
         private void UsbClick(object sender, RoutedEventArgs e)//обработка всех областей
         {
 
-            Trace.WriteLine("usb");
-            /*Trace.WriteLine("eeeee");*/
             if ((bool)Plus.IsChecked)//обработка выделения GND
             {
                 UsbButton.Opacity = 1;
                 Plus.IsChecked = false;
-                /*Trace.WriteLine("eeeee");*/
+                compare.Add(GndButton);
+                /*sender.*/
             }
         }
 
@@ -116,8 +107,10 @@ namespace ЭВМ
                     MotherBoardImage.Visibility = Visibility.Visible;
                     ToolsPages.Visibility = Visibility.Visible;
                     
-                    // if (Multimeter.IsSelected)
-                    //   Trace.WriteLine("1");
+
+
+                    /*  if (Multimeter.IsSelected)
+                        Trace.WriteLine("1");*/
                     //else 
                     //{ 
                     //   Trace.WriteLine(Multimeter.IsSelected);
@@ -139,58 +132,116 @@ namespace ЭВМ
             }
         }
 
-        private void ClickArea_Click(object sender, RoutedEventArgs e)
+        /*public string Test ()
         {
+            return "213";
 
+        }*/
+
+
+        private void Plus_Click(object sender, RoutedEventArgs e)
+        {
+            Minus.IsChecked = false;
         }
-    }
+
+        private void Minus_Click(object sender, RoutedEventArgs e)
+        {
+            Plus.IsChecked = false;
+        }
     public class MotherBoard
     {
         RTC rtc;
+        GND gnd;
+        USB usb;
         MotherBoard(int branching)
         {
-            Init(this, branching);
+            rtc= new RTC();
+            gnd = new GND();
+            usb = new USB();
+            switch (branching)
+            {                      //от 0.450мВ до 0.7мВ
+                case 1://кз по USB
+                    usb.Fill(NextFloat(0.45f,0.7f), NextFloat(10f,8f), NextFloat(0.3f,0.9f));//v,r,a
+                    /*MainWindow.VoltageText*/
+                            /*VoltageText.Text = "1,23";*/
 
-        }
-    }
+                        /*NumbersVoltage.IsChecked = false;*/
 
-
-    public class RTC
-    {
-        int V;//напряжение
-        int R;//сопротивление
-        int A;//сила тока
-    }
-
-
-    //public class 
-   
-    public static class Tools //класс для метода инициализации
-    {
-        public static void Init(MotherBoard board,int branching)//инициализация MotherBoard в
-        {
-            switch (branching) 
-            {
-                case 1:
-
-
-
-                    break;
+                        break;
                 case 2:////часы не работают - не работает южный порт
                     //осцилограма не показывает//график не синусоидальный//Частота не 32768Гц
 
 
 
                     break;
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
             }
+
+        }
+    }
+
+    }
+
+
+    public class RTC
+    {
+        float V;//напряжение
+        float R;//сопротивление
+        float A;//сила тока
+    }
+
+    public class USB
+    {
+        float V;//напряжение
+        float R;//сопротивление
+        float A;//сила тока
+        public USB()
+        {
+            V = 0;//напряжение
+            R = 0;//сопротивление
+            A = 0;//сила тока
+        }
+        public void Fill(float v, float r, float a)
+        {
+            V = v;//напряжение
+            R = r;//сопротивление
+            A = a;//сила тока
         }
 
-     
+
+    }
+    public class GND
+    {
+        float V;//напряжение
+        float R;//сопротивление
+        float A;//сила тока
+        public GND()
+        {
+            V = 0;//напряжение
+            R = 0;//сопротивление
+            A = 0;//сила тока
+        }
+    }
+
+    public static class Tools //класс для метода инициализации
+    {
+        public static float NextFloat(float min, float max)
+        {
+            Random random = new Random();
+            double range;
+            double sample;
+            double scaled;
+            range  = (double)max - (double)min;
+            sample = random.NextDouble();
+            scaled = (sample * range) + min;
+            return (float)scaled;
+        }
     }
 
 
