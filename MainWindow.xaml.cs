@@ -24,14 +24,35 @@ namespace ЭВМ
 
     public partial class MainWindow : Window
     {
+        Random rand = new Random();
         MotherBoard AorusB450;
         List<Button> compare = new List<Button>();
+        bool IsGenering;
         //массив выделенных объектов
 
         public MainWindow()
         {
             InitializeComponent();
+            CompositionTarget.Rendering += update;
         }
+
+
+        private void update(object sender, EventArgs e)
+        {
+            if ((AorusB450 != null) &&(compare.Count == 2)&&(rand.Next(0,100)>80))
+            {
+                AorusB450.refresh(1);
+                VoltageText.Text = AorusB450.usb.V.ToString("0.00");
+                AmperText.Text = AorusB450.usb.A.ToString("0.00");
+                ResistText.Text = AorusB450.usb.R.ToString("0.00");
+            }
+        }
+
+
+
+
+
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -42,17 +63,16 @@ namespace ЭВМ
             }
         }
 
-
         private void GndClick(object sender, RoutedEventArgs e)//обработка всех областей
         {
-
+            
             if ((bool)Minus.IsChecked  /*и массив не пустой*/ )//обработка выделения GND
             {
                 GndButton.Opacity = 1;
                 Minus.IsChecked = false;
-                /*compare.Add(GndButton);*/
+                compare.Add(GndButton);
                 //добавил в массив объект
-                //запуски функции 
+                //запуски функции
             }
         }
 
@@ -63,14 +83,15 @@ namespace ЭВМ
             {
                 UsbButton.Opacity = 1;
                 Plus.IsChecked = false;
-                compare.Add(GndButton);
+                compare.Add(UsbButton);
+
                 /*sender.*/
             }
         }
 
         public void Tab_Click(object sender, RoutedEventArgs e)
         {
-            string Source = "";
+            string Source = "0,00";
             try 
             {
             Source = (string)((TextBlock)e.OriginalSource).Text;
@@ -98,7 +119,7 @@ namespace ЭВМ
             string Source = (string)((Button)e.OriginalSource).Content;
             string NumberString = Source.Substring(Source.Length-1);//образка названия кнопки, для выделения числа
             int Number = int.Parse(NumberString);//преобразование в int
-            switch(Number)
+            switch (Number)
             {
                 case 1://КЗ
                     Menu.Visibility = Visibility.Hidden;
@@ -106,7 +127,7 @@ namespace ЭВМ
                     About.Visibility = Visibility.Hidden;
                     MotherBoardImage.Visibility = Visibility.Visible;
                     ToolsPages.Visibility = Visibility.Visible;
-                    
+                    AorusB450 = new MotherBoard(1);
 
 
                     /*  if (Multimeter.IsSelected)
@@ -132,11 +153,6 @@ namespace ЭВМ
             }
         }
 
-        /*public string Test ()
-        {
-            return "213";
-
-        }*/
 
 
         private void Plus_Click(object sender, RoutedEventArgs e)
@@ -148,59 +164,81 @@ namespace ЭВМ
         {
             Plus.IsChecked = false;
         }
-    public class MotherBoard
-    {
-        RTC rtc;
-        GND gnd;
-        USB usb;
-        MotherBoard(int branching)
+
+        private void Clear_Click(object sender, RoutedEventArgs e)
         {
-            rtc= new RTC();
-            gnd = new GND();
-            usb = new USB();
-            switch (branching)
-            {                      //от 0.450мВ до 0.7мВ
-                case 1://кз по USB
-                    usb.Fill(NextFloat(0.45f,0.7f), NextFloat(10f,8f), NextFloat(0.3f,0.9f));//v,r,a
-                    /*MainWindow.VoltageText*/
-                            /*VoltageText.Text = "1,23";*/
+            IsGenering = false;
+        }
+
+
+        public class MotherBoard
+        {
+            public RTC rtc;
+            public GND gnd;
+            public USB usb;
+
+            public void refresh(int branching)
+            {
+                switch (branching)
+                {                      //от 0.450мВ до 0.7мВ
+                    case 1://кз по USB
+                        usb.Fill(NextFloat(0.45f, 0.7f), NextFloat(10f, 8f), NextFloat(0.3f, 0.9f));//v,r,a
+                        /*MainWindow.VoltageText*/
+
 
                         /*NumbersVoltage.IsChecked = false;*/
 
                         break;
-                case 2:////часы не работают - не работает южный порт
-                    //осцилограма не показывает//график не синусоидальный//Частота не 32768Гц
-
-
-
-                    break;
-
-
-
-
-
-
+                    case 2:////часы не работают - не работает южный порт
+                           //осцилограма не показывает//график не синусоидальный//Частота не 32768Гц
+                        break;
+                }
 
             }
+            public MotherBoard(int branching)
+            {
+                rtc = new RTC();
+                gnd = new GND();
+                usb = new USB();
+                switch (branching)
+                {                      //от 0.450мВ до 0.7мВ
+                    case 1://кз по USB
+                        usb.Fill(NextFloat(0.45f, 0.7f), NextFloat(10f, 8f), NextFloat(0.3f, 0.9f));//v,r,a
+                        /*MainWindow.VoltageText*/
+                        
+
+                        /*NumbersVoltage.IsChecked = false;*/
+
+                        break;
+                    case 2:////часы не работают - не работает южный порт
+                           //осцилограма не показывает//график не синусоидальный//Частота не 32768Гц
+                        break;
+                }
+            }
+
 
         }
+
+      
     }
 
-    }
+
+
+}
 
 
     public class RTC
     {
-        float V;//напряжение
-        float R;//сопротивление
-        float A;//сила тока
+        public float V;//напряжение
+        public float R;//сопротивление
+        public float A;//сила тока
     }
 
     public class USB
     {
-        float V;//напряжение
-        float R;//сопротивление
-        float A;//сила тока
+        public float V;//напряжение
+        public float R;//сопротивление
+        public float A;//сила тока
         public USB()
         {
             V = 0;//напряжение
@@ -218,9 +256,9 @@ namespace ЭВМ
     }
     public class GND
     {
-        float V;//напряжение
-        float R;//сопротивление
-        float A;//сила тока
+        public float V;//напряжение
+        public float R;//сопротивление
+        public float A;//сила тока
         public GND()
         {
             V = 0;//напряжение
@@ -242,7 +280,8 @@ namespace ЭВМ
             scaled = (sample * range) + min;
             return (float)scaled;
         }
+
     }
 
 
-}
+
