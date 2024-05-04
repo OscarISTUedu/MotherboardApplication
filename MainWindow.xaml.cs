@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Printing;
 using System.Security.AccessControl;
 using System.Text;
 using System.Windows;
@@ -27,19 +28,27 @@ namespace ЭВМ
         Random rand = new Random();
         MotherBoard AorusB450;
         List<Button> compare = new List<Button>();
-        bool IsGenering;
         //массив выделенных объектов
-
         public MainWindow()
         {
             InitializeComponent();
-            CompositionTarget.Rendering += update;
+            /*CompositionTarget.Rendering += update;*/
         }
 
+        private void StopGenering(object sender, EventArgs e)
+        {
+            CompositionTarget.Rendering -= update;
+            compare.Clear();
+            VoltageText.Text = "0.00";
+            AmperText.Text = "0.00";
+            ResistText.Text = "0.00";
+            GndButton.Opacity= 0;
+            UsbButton.Opacity= 0;
+        }
 
         private void update(object sender, EventArgs e)
         {
-            if ((AorusB450 != null) &&(compare.Count == 2)&&(rand.Next(0,100)>80))
+            if ((AorusB450 != null) &&(rand.Next(0,100)>80))
             {
                 AorusB450.refresh(1);
                 VoltageText.Text = AorusB450.usb.V.ToString("0.00");
@@ -47,12 +56,6 @@ namespace ЭВМ
                 ResistText.Text = AorusB450.usb.R.ToString("0.00");
             }
         }
-
-
-
-
-
-
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -63,6 +66,11 @@ namespace ЭВМ
             }
         }
 
+       /* public void test()
+        {
+            compare[0].Name;
+        }
+*/
         private void GndClick(object sender, RoutedEventArgs e)//обработка всех областей
         {
             
@@ -71,6 +79,16 @@ namespace ЭВМ
                 GndButton.Opacity = 1;
                 Minus.IsChecked = false;
                 compare.Add(GndButton);
+                if ((compare.Count == 2) && (compare[0] != compare[1])) 
+                {
+                    CompositionTarget.Rendering += update;
+
+                }
+                else if ((compare.Count == 2) && (compare[0] == compare[1])) 
+                {
+                    compare.RemoveAt(1);
+                }
+                Trace.WriteLine(compare.Count);
                 //добавил в массив объект
                 //запуски функции
             }
@@ -84,7 +102,15 @@ namespace ЭВМ
                 UsbButton.Opacity = 1;
                 Plus.IsChecked = false;
                 compare.Add(UsbButton);
-
+                if ((compare.Count == 2) && (compare[0] != compare[1]))
+                {
+                    CompositionTarget.Rendering += update;
+                }
+                else if ((compare.Count == 2) && (compare[0] == compare[1]))
+                {
+                    compare.RemoveAt(1);
+                }
+                Trace.WriteLine(compare.Count);
                 /*sender.*/
             }
         }
@@ -163,11 +189,6 @@ namespace ЭВМ
         private void Minus_Click(object sender, RoutedEventArgs e)
         {
             Plus.IsChecked = false;
-        }
-
-        private void Clear_Click(object sender, RoutedEventArgs e)
-        {
-            IsGenering = false;
         }
 
 
