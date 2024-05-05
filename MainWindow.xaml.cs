@@ -22,7 +22,6 @@ namespace ЭВМ
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-
     public partial class MainWindow : Window
     {
         Random rand = new Random();
@@ -32,7 +31,6 @@ namespace ЭВМ
         public MainWindow()
         {
             InitializeComponent();
-            /*CompositionTarget.Rendering += update;*/
         }
 
         private void StopGenering(object sender, EventArgs e)
@@ -44,11 +42,14 @@ namespace ЭВМ
             ResistText.Text = "0.00";
             GndButton.Opacity= 0;
             UsbButton.Opacity= 0;
+            Plus.IsHitTestVisible = true;
+            Minus.IsHitTestVisible = true;
+            //можно трогатть чек боксы
         }
 
         private void update(object sender, EventArgs e)
         {
-            if ((AorusB450 != null) &&(rand.Next(0,100)>80))
+            if ((AorusB450 != null) &&(rand.Next(0,100)>95))
             {
                 AorusB450.refresh(1);
                 VoltageText.Text = AorusB450.usb.V.ToString("0.00");
@@ -82,12 +83,14 @@ namespace ЭВМ
                 if ((compare.Count == 2) && (compare[0] != compare[1])) 
                 {
                     CompositionTarget.Rendering += update;
-
+                    Plus.IsHitTestVisible = false;
+                    Minus.IsHitTestVisible = false;
                 }
                 else if ((compare.Count == 2) && (compare[0] == compare[1])) 
                 {
                     compare.RemoveAt(1);
                 }
+
                 Trace.WriteLine(compare.Count);
                 //добавил в массив объект
                 //запуски функции
@@ -105,6 +108,8 @@ namespace ЭВМ
                 if ((compare.Count == 2) && (compare[0] != compare[1]))
                 {
                     CompositionTarget.Rendering += update;
+                    Plus.IsHitTestVisible = false;
+                    Minus.IsHitTestVisible = false;
                 }
                 else if ((compare.Count == 2) && (compare[0] == compare[1]))
                 {
@@ -170,12 +175,7 @@ namespace ЭВМ
                     About.Visibility = Visibility.Hidden;
                     MotherBoardImage.Visibility = Visibility.Visible;
                     ToolsPages.Visibility = Visibility.Visible;
-
-
-
                     break;
-
-
             }
         }
 
@@ -205,10 +205,7 @@ namespace ЭВМ
                     case 1://кз по USB
                         usb.Fill(NextFloat(0.45f, 0.7f), NextFloat(10f, 8f), NextFloat(0.3f, 0.9f));//v,r,a
                         /*MainWindow.VoltageText*/
-
-
                         /*NumbersVoltage.IsChecked = false;*/
-
                         break;
                     case 2:////часы не работают - не работает южный порт
                            //осцилограма не показывает//график не синусоидальный//Частота не 32768Гц
@@ -222,7 +219,7 @@ namespace ЭВМ
                 gnd = new GND();
                 usb = new USB();
                 switch (branching)
-                {                      //от 0.450мВ до 0.7мВ
+                {          //от 0.450мВ до 0.7мВ
                     case 1://кз по USB
                         usb.Fill(NextFloat(0.45f, 0.7f), NextFloat(10f, 8f), NextFloat(0.3f, 0.9f));//v,r,a
                         /*MainWindow.VoltageText*/
