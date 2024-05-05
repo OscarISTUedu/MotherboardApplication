@@ -18,6 +18,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace ЭВМ
 {
+    using static System.Runtime.InteropServices.JavaScript.JSType;
     using static Tools;
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -37,9 +38,9 @@ namespace ЭВМ
         {
             CompositionTarget.Rendering -= update;
             compare.Clear();
-            VoltageText.Text = "0.00";
-            AmperText.Text = "0.00";
-            ResistText.Text = "0.00";
+            VoltageText.Text = "0,000";
+            AmperText.Text = "0,000";
+            ResistText.Text = "0,000";
             GndButton.Opacity= 0;
             UsbButton.Opacity= 0;
             Plus.IsHitTestVisible = true;
@@ -52,9 +53,10 @@ namespace ЭВМ
             if ((AorusB450 != null) &&(rand.Next(0,100)>95))
             {
                 AorusB450.refresh(1);
-                VoltageText.Text = AorusB450.usb.V.ToString("0.00");
-                AmperText.Text = AorusB450.usb.A.ToString("0.00");
-                ResistText.Text = AorusB450.usb.R.ToString("0.00");
+                VoltageText.Text = AorusB450.usb.V;
+                AmperText.Text = AorusB450.usb.A;
+                ResistText.Text = AorusB450.usb.R;
+                /*string roundedNumber = number.ToString("N3");*/
             }
         }
 
@@ -67,11 +69,7 @@ namespace ЭВМ
             }
         }
 
-       /* public void test()
-        {
-            compare[0].Name;
-        }
-*/
+   
         private void GndClick(object sender, RoutedEventArgs e)//обработка всех областей
         {
             
@@ -122,7 +120,7 @@ namespace ЭВМ
 
         public void Tab_Click(object sender, RoutedEventArgs e)
         {
-            string Source = "0,00";
+            string Source = "";
             try 
             {
             Source = (string)((TextBlock)e.OriginalSource).Text;
@@ -152,7 +150,7 @@ namespace ЭВМ
             int Number = int.Parse(NumberString);//преобразование в int
             switch (Number)
             {
-                case 1://КЗ
+                case 1://всё исправно
                     Menu.Visibility = Visibility.Hidden;
                     Begin.Visibility = Visibility.Hidden;
                     About.Visibility = Visibility.Hidden;
@@ -194,18 +192,20 @@ namespace ЭВМ
 
         public class MotherBoard
         {
-            public RTC rtc;
-            public GND gnd;
-            public USB usb;
+            private Random rnd;
+            public Elem rtc;
+            public Elem gnd;
+            public Elem usb;
 
             public void refresh(int branching)
             {
                 switch (branching)
                 {                      //от 0.450мВ до 0.7мВ
-                    case 1://кз по USB
-                        usb.Fill(NextFloat(0.45f, 0.7f), NextFloat(10f, 8f), NextFloat(0.3f, 0.9f));//v,r,a
-                        /*MainWindow.VoltageText*/
-                        /*NumbersVoltage.IsChecked = false;*/
+                    case 1://всё исправно
+                        usb.Fill(usb.V.Substring(0,3) + rnd.Next(10, 100), (""+((float)Convert.ToDouble(usb.V)* Math.Pow(10,3) / ((float)Convert.ToDouble(usb.A)*Math.Pow(10,3)))).Substring(0,4), "0," + 5);//v,r,a
+                        Trace.WriteLine(usb.R);
+                        /*Trace.WriteLine(((float)Convert.ToDouble(usb.V) * Math.Pow(10, -3) / (float)Convert.ToDouble(usb.A)));
+                        Trace.WriteLine(usb.R);*/
                         break;
                     case 2:////часы не работают - не работает южный порт
                            //осцилограма не показывает//график не синусоидальный//Частота не 32768Гц
@@ -215,18 +215,16 @@ namespace ЭВМ
             }
             public MotherBoard(int branching)
             {
-                rtc = new RTC();
-                gnd = new GND();
-                usb = new USB();
+                rnd = new Random();
+                rtc = new Elem();
+                gnd = new Elem();
+                usb = new Elem();
                 switch (branching)
                 {          //от 0.450мВ до 0.7мВ
-                    case 1://кз по USB
-                        usb.Fill(NextFloat(0.45f, 0.7f), NextFloat(10f, 8f), NextFloat(0.3f, 0.9f));//v,r,a
+                    case 1://всё исправно
+                        usb.Fill("0,"+rnd.Next(4,7)+rnd.Next(10,100), "1", "0," + 5);//v,r,a
                         /*MainWindow.VoltageText*/
-                        
-
                         /*NumbersVoltage.IsChecked = false;*/
-
                         break;
                     case 2:////часы не работают - не работает южный порт
                            //осцилограма не показывает//график не синусоидальный//Частота не 32768Гц
@@ -237,51 +235,24 @@ namespace ЭВМ
 
         }
 
-      
     }
-
-
 
 }
 
-
-    public class RTC
+    public class Elem
     {
-        public float V;//напряжение
-        public float R;//сопротивление
-        public float A;//сила тока
-    }
-
-    public class USB
-    {
-        public float V;//напряжение
-        public float R;//сопротивление
-        public float A;//сила тока
-        public USB()
+        public string V;//напряжение
+        public string R;//сопротивление
+        public string A;//сила тока
+        public Elem()
         {
-            V = 0;//напряжение
-            R = 0;//сопротивление
-            A = 0;//сила тока
+        V = ""; R=""; A="";
         }
-        public void Fill(float v, float r, float a)
+        public void Fill(string v, string r, string a)
         {
             V = v;//напряжение
             R = r;//сопротивление
             A = a;//сила тока
-        }
-
-
-    }
-    public class GND
-    {
-        public float V;//напряжение
-        public float R;//сопротивление
-        public float A;//сила тока
-        public GND()
-        {
-            V = 0;//напряжение
-            R = 0;//сопротивление
-            A = 0;//сила тока
         }
     }
 
