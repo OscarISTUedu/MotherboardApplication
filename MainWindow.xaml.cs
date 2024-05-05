@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
@@ -27,7 +28,7 @@ namespace ЭВМ
     {
         Random rand = new Random();
         MotherBoard AorusB450;
-        List<Button> compare = new List<Button>();
+        Elem [] compare = new Elem[2];  
         //массив выделенных объектов
         public MainWindow()
         {
@@ -37,7 +38,7 @@ namespace ЭВМ
         private void StopGenering(object sender, EventArgs e)
         {
             CompositionTarget.Rendering -= update;
-            compare.Clear();
+            Array.Clear(compare,0 ,compare.Length);
             VoltageText.Text = "0,000";
             AmperText.Text = "0,000";
             ResistText.Text = "0,000";
@@ -45,7 +46,6 @@ namespace ЭВМ
             UsbButton.Opacity= 0;
             Plus.IsHitTestVisible = true;
             Minus.IsHitTestVisible = true;
-            //можно трогатть чек боксы
         }
 
         private void update(object sender, EventArgs e)
@@ -70,26 +70,25 @@ namespace ЭВМ
         }
 
    
-        private void GndClick(object sender, RoutedEventArgs e)//обработка всех областей
+        private void GndClick(object sender, RoutedEventArgs e)//gnd всегда в compare[0],второй элемент всегда в compare[1]
         {
             
-            if ((bool)Minus.IsChecked  /*и массив не пустой*/ )//обработка выделения GND
+            if ((bool)Minus.IsChecked)//обработка выделения GND
             {
                 GndButton.Opacity = 1;
                 Minus.IsChecked = false;
-                compare.Add(GndButton);
-                if ((compare.Count == 2) && (compare[0] != compare[1])) 
+                compare[0]=AorusB450.gnd;   
+                if (GetNumOfElem(compare) == 2) 
                 {
-                    CompositionTarget.Rendering += update;
-                    Plus.IsHitTestVisible = false;
-                    Minus.IsHitTestVisible = false;
+                    if (compare[0] != compare[1])
+                    {
+                        CompositionTarget.Rendering += update;
+                        Plus.IsHitTestVisible = false;
+                        Minus.IsHitTestVisible = false;
+                        return;
+                    }
+                    Array.Clear(compare, 1, compare.Length);
                 }
-                else if ((compare.Count == 2) && (compare[0] == compare[1])) 
-                {
-                    compare.RemoveAt(1);
-                }
-
-                Trace.WriteLine(compare.Count);
                 //добавил в массив объект
                 //запуски функции
             }
@@ -102,19 +101,18 @@ namespace ЭВМ
             {
                 UsbButton.Opacity = 1;
                 Plus.IsChecked = false;
-                compare.Add(UsbButton);
-                if ((compare.Count == 2) && (compare[0] != compare[1]))
+                compare[1] = AorusB450.usb;
+                if (GetNumOfElem(compare) == 2) 
                 {
-                    CompositionTarget.Rendering += update;
-                    Plus.IsHitTestVisible = false;
-                    Minus.IsHitTestVisible = false;
+                    if (compare[0] != compare[1])
+                    {
+                        CompositionTarget.Rendering += update;
+                        Plus.IsHitTestVisible = false;
+                        Minus.IsHitTestVisible = false;
+                        return;
+                    }
+                    Array.Clear(compare, 1, compare.Length);
                 }
-                else if ((compare.Count == 2) && (compare[0] == compare[1]))
-                {
-                    compare.RemoveAt(1);
-                }
-                Trace.WriteLine(compare.Count);
-                /*sender.*/
             }
         }
 
@@ -203,7 +201,7 @@ namespace ЭВМ
                 {                      //от 0.450мВ до 0.7мВ
                     case 1://всё исправно
                         usb.Fill(usb.V.Substring(0,3) + rnd.Next(10, 100), (""+((float)Convert.ToDouble(usb.V)* Math.Pow(10,3) / ((float)Convert.ToDouble(usb.A)*Math.Pow(10,3)))).Substring(0,4), "0," + 5);//v,r,a
-                        Trace.WriteLine(usb.R);
+                        /*Trace.WriteLine(usb.R);*/
                         /*Trace.WriteLine(((float)Convert.ToDouble(usb.V) * Math.Pow(10, -3) / (float)Convert.ToDouble(usb.A)));
                         Trace.WriteLine(usb.R);*/
                         break;
@@ -268,6 +266,16 @@ namespace ЭВМ
             sample = random.NextDouble();
             scaled = (sample * range) + min;
             return (float)scaled;
+        }
+
+        public static int GetNumOfElem(Elem[] arr)
+        {
+        int k = 0;
+        for (int i = 0; i < arr.Length;i++)
+        {
+        if (arr[i] != null) k++;
+        }
+        return k;
         }
 
     }
