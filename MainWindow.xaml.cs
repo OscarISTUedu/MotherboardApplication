@@ -30,6 +30,7 @@ namespace ЭВМ
         MotherBoard AorusB450;
         Elem [] compare = new Elem[2];
         private double _factor = 0.5;//масштаб
+        bool isZoomed = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -52,11 +53,15 @@ namespace ЭВМ
 
         private void Zoom(object sender, RoutedEventArgs e)
         {
-         
+            isZoomed=!isZoomed;
+            if (isZoomed) MagnifierPanel.Visibility= Visibility.Visible;
+            else MagnifierPanel.Visibility= Visibility.Collapsed;
         }
 
         private void ContentPanel_MouseMove(object sender, MouseEventArgs e)
         {
+            if (!isZoomed)
+                return;
             Point center = e.GetPosition(MotherBoardImage);
             double length = MagnifierCircle.ActualWidth * _factor;
             double radius = length / 2;
@@ -68,11 +73,15 @@ namespace ЭВМ
 
         private void ContentPanel_MouseEnter(object sender, MouseEventArgs e)
         {
+            if (!isZoomed)
+                return;
             MagnifierCircle.Visibility = Visibility.Visible;
         }
 
         private void ContentPanel_MouseLeave(object sender, MouseEventArgs e)
         {
+            if (!isZoomed)
+                return;
             MagnifierCircle.Visibility = Visibility.Hidden;
         }
 

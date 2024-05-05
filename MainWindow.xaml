@@ -51,7 +51,7 @@
             </Grid.ColumnDefinitions>
             <Grid>
                 <Image x:Name="MotherBoardImage" Grid.Column="0" Source="/AorusB450Elite.jpg" Stretch="Fill" Visibility="Hidden"  MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" MouseLeave="ContentPanel_MouseLeave"></Image>
-                <Canvas IsHitTestVisible="False" Name="MagnifierPanel">
+                <Canvas IsHitTestVisible="False" Name="MagnifierPanel" Visibility="Collapsed">
                     <Ellipse Stroke="LightBlue" Name="MagnifierCircle" Height="100" Width="100">
                         <Ellipse.Fill>
                             <VisualBrush x:Name="MagnifierBrush"  Visual="{Binding ElementName=MotherBoardImage}" ViewboxUnits="Absolute"/>
@@ -126,18 +126,19 @@
                 <TabItem x:Name="Totals"  Header="Выводы" MouseLeftButtonUp="Tab_Click">
                 </TabItem>
             </TabControl>
-            
-            <Grid x:Name="GND" Grid.Column="0" Grid.Row="0" >
-                <Button x:Name="GndButton" Grid.Column="0" Grid.Row="0" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="GndClick" Content="GND" FontSize="22" Foreground="LightGray" Width="88" Height="409" Margin="0,-370,782,0"   ></Button>
+
+            <Grid x:Name="GND" Grid.Column="0" Grid.Row="0" MouseMove="ContentPanel_MouseMove">
+                <Button x:Name="GndButton" Grid.Column="0" Grid.Row="0" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="GndClick" Content="GND" FontSize="22" Foreground="LightGray" Width="88" Height="409" Margin="0,-370,782,0"  MouseEnter="ContentPanel_MouseEnter" ></Button>
             </Grid>
 
-            <Grid x:Name="RTC" Width="20" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="564,542,302,185" Focusable="False" >
+            <Grid x:Name="RTC" Width="20" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="564,542,302,185" Focusable="False" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter">
                 <Button x:Name="RtcButton" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Rtc_Click" Content="RTC" FontSize="5" Foreground="LightGray" Grid.IsSharedSizeScope="True" />
             </Grid>
 
-            <Grid x:Name="USB1" HorizontalAlignment="Left" Height="22" VerticalAlignment="Bottom" Width="59" Margin="472,0,0,12" Grid.Column="0">
+            <Grid x:Name="USB1" HorizontalAlignment="Left" Height="22" VerticalAlignment="Bottom" Width="59" Margin="472,0,0,12" Grid.Column="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter">
                 <Button x:Name="UsbButton" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="UsbClick" Content="USB1" FontSize="5" Foreground="LightGray"  />
             </Grid>
+            
         </Grid>
 
     </Grid>
