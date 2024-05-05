@@ -17,9 +17,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static System.Net.Mime.MediaTypeNames;
 
+
 namespace ЭВМ
 {
-    using static System.Runtime.InteropServices.JavaScript.JSType;
     using static Tools;
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -28,11 +28,12 @@ namespace ЭВМ
     {
         Random rand = new Random();
         MotherBoard AorusB450;
-        Elem [] compare = new Elem[2];  
-        //массив выделенных объектов
+        Elem [] compare = new Elem[2];
+        private double _factor = 0.5;//масштаб
         public MainWindow()
         {
             InitializeComponent();
+            ResizeMode = ResizeMode.NoResize;
         }
 
         private void StopGenering(object sender, EventArgs e)
@@ -48,6 +49,36 @@ namespace ЭВМ
             Plus.IsHitTestVisible = true;
             Minus.IsHitTestVisible = true;
         }
+
+        private void Zoom(object sender, RoutedEventArgs e)
+        {
+         
+        }
+
+        private void ContentPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point center = e.GetPosition(MotherBoardImage);
+            double length = MagnifierCircle.ActualWidth * _factor;
+            double radius = length / 2;
+            Rect viewboxRect = new Rect(center.X - radius, center.Y - radius, length, length);
+            MagnifierBrush.Viewbox = viewboxRect;
+            MagnifierCircle.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
+            MagnifierCircle.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
+        }
+
+        private void ContentPanel_MouseEnter(object sender, MouseEventArgs e)
+        {
+            MagnifierCircle.Visibility = Visibility.Visible;
+        }
+
+        private void ContentPanel_MouseLeave(object sender, MouseEventArgs e)
+        {
+            MagnifierCircle.Visibility = Visibility.Hidden;
+        }
+
+
+
+
 
         private void update(object sender, EventArgs e)
         {
@@ -74,15 +105,6 @@ namespace ЭВМ
                     ResistText.Text = "???";
                 }
                 AorusB450.refresh(1);
-                /*AorusB450.usb.V;*/
-                /*VoltageText.Text = "" + ((float)Convert.ToDouble(compare[1].V) - (float)Convert.ToDouble(compare[0].V));
-                AmperText.Text = "" + Math.Abs((float)Convert.ToDouble(compare[1].A) - (float)Convert.ToDouble(compare[0].A));*/
-                    /*AmperText.Text = AorusB450.usb.A;*/
-                    //если мерим между двумя элементами то сила тока считается через мощность бп
-               /* AmperText.Text = AorusB450.usb.A;
-                VoltageText.Text = AorusB450.usb.V;
-                ResistText.Text = AorusB450.usb.R;*/
-               /*string roundedNumber = number.ToString("N3");*/
             }
         }
 
@@ -310,6 +332,7 @@ namespace ЭВМ
                     case 1://всё исправно
                         usb.Fill(usb.V.Substring(0,3) + rnd.Next(10, 100), (""+((float)Convert.ToDouble(usb.V)* Math.Pow(10,3) / ((float)Convert.ToDouble(usb.A)*Math.Pow(10,3)))).Substring(0,4), "0," + 5);//v,r,a
                         gnd.Fill("0", "0", "0");
+                        rtc.Fill("0", "0", "0");
                         /*Trace.WriteLine(usb.R);*/
                         /*Trace.WriteLine(((float)Convert.ToDouble(usb.V) * Math.Pow(10, -3) / (float)Convert.ToDouble(usb.A)));
                         Trace.WriteLine(usb.R);*/
@@ -332,6 +355,7 @@ namespace ЭВМ
                     case 1://всё исправно
                         usb.Fill("0,"+rnd.Next(4,7)+rnd.Next(10,100), "1", "0," + 5);//v,r,a
                         gnd.Fill("0", "0", "0");
+                        rtc.Fill("0", "0", "0");
                         /*rtc.Fill();*/
                         break;
                     case 2:////часы не работают - не работает южный порт
@@ -339,7 +363,6 @@ namespace ЭВМ
                         break;
                 }
             }
-
 
         }
 
@@ -349,9 +372,10 @@ namespace ЭВМ
         }
     }
 
+
 }
 
-    public class Elem
+public class Elem
     {
         public bool isGND=false;
         public string V;//напряжение
@@ -398,18 +422,10 @@ namespace ЭВМ
             }
         return k;
         }
-        
-        public static void HiddenButtons(Elem[] arr)
-        {
-            for (int i = 0;i < arr.Length;i++) 
-            {
-
-
-            }
-
-        }
-
     }
+
+
+
 
 
 
