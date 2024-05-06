@@ -16,7 +16,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Name="border"
-						BorderBrush="DarkGray"
+						BorderBrush="Yellow"
 						CornerRadius="3"
                         BorderThickness="1"
 						Background="{TemplateBinding Background}">
@@ -72,9 +72,10 @@
                 <ColumnDefinition Width="3*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
+          
             <Grid>
                 <Image x:Name="MotherBoardImage" Grid.Column="0" Source="/AorusB450Elite.jpg" Stretch="Fill" Visibility="Hidden"  MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" MouseLeave="ContentPanel_MouseLeave"></Image>
-                <Canvas IsHitTestVisible="False" Name="MagnifierPanel" Visibility="Hidden" Panel.ZIndex="2">
+                <Canvas IsHitTestVisible="False" Name="MagnifierPanel" Visibility="Hidden" >
                     <Ellipse Stroke="LightBlue" Name="MagnifierCircle" Height="100" Width="100" >
                         <Ellipse.Fill>
                             <VisualBrush x:Name="MagnifierBrush"  Visual="{Binding ElementName=MotherBoardImage}" ViewboxUnits="Absolute"/>
@@ -82,7 +83,6 @@
                     </Ellipse>
                 </Canvas>
             </Grid>
-            
 
             <TabControl  Name="ToolsPages" Grid.Column="1" Visibility="Hidden">
                 <TabItem x:Name="Oscilloscope" Header="Осцилограф"  MouseLeftButtonUp="Tab_Click">
@@ -115,7 +115,7 @@
                                         <TextBlock x:Name="DownVoltageText" Opacity="0.6" Foreground="Red" FontSize="39" Text="0,000"  FontFamily="DSEG7 Classic Mini" ></TextBlock>
                                     </StackPanel>
                                 </Grid>
-                                <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" TextChanged="TextBox_TextChanged" >Падение напряжение(мВ)</TextBox>
+                                <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" >Падение напряжение(мВ)</TextBox>
                                 <Grid x:Name="NumbersAmpers" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalAlignment="Center">
                                    
                                 </Grid>
@@ -141,22 +141,18 @@
                     </TabItem.Content>
                 </TabItem>
 
+                
                 <TabItem x:Name="Totals"  Header="Выводы" MouseLeftButtonUp="Tab_Click">
                 </TabItem>
             </TabControl>
-
-            <Grid x:Name="GND" Grid.Column="0" Grid.Row="0" MouseMove="ContentPanel_MouseMove" Panel.ZIndex="1">
-                <Button x:Name="GndButton" Panel.ZIndex="1" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="GndClick" Content="GND" FontSize="22" Foreground="LightGray" Width="88" Height="528" Margin="0,-488,782,0"  MouseEnter="ContentPanel_MouseEnter" ></Button>
-            </Grid>
-
-            <Grid x:Name="RTC" Width="20" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="564,647,299,179" Focusable="False" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Panel.ZIndex="1">
-                <Button x:Name="RtcButton" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Rtc_Click" Content="RTC" FontSize="5" Foreground="LightGray" Grid.IsSharedSizeScope="True" />
-            </Grid>
-
-            <Grid x:Name="USB1" HorizontalAlignment="Left" Height="22" VerticalAlignment="Bottom" Width="59" Margin="479,0,0,19" Grid.Column="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Panel.ZIndex="1">
-                <Button x:Name="UsbButton" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="UsbClick" Content="USB1" FontSize="5" Foreground="LightGray"  />
-            </Grid>
-            
+                <Button x:Name="GndButton" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Anyclick" Content="GND" FontSize="22" Foreground="LightGray" Width="88" Height="528" Margin="0,-488,782,0"></Button>
+                <Button x:Name="RtcButton" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Anyclick" Content="RTC" FontSize="20" Foreground="LightGray" Grid.IsSharedSizeScope="True" Width="70" Height="60" Margin="-285,-118,0,0" />
+                <Button x:Name="GndUsb1_1" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Anyclick" Content="GND" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,987,-91,0"></Button>
+                <Button x:Name="GndUsb1_2" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Anyclick" Content="GND" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,967,-91,0"></Button>
+                <Button x:Name="Usb1_1" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,967,-111,0"  />
+                <Button x:Name="Usb1_2" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,987,-111,0"  />
+                <Button x:Name="Usb1_3" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,987,-132,0"  />
+                <Button x:Name="Usb1_4" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,967,-132,0"  />
         </Grid>
 
     </Grid>
