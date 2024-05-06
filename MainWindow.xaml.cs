@@ -41,9 +41,7 @@ namespace ЭВМ
         {
             CompositionTarget.Rendering -= update;
             Array.Clear(compare,0 ,compare.Length);
-            VoltageText.Text = "0,000";
-            AmperText.Text = "0,000";
-            ResistText.Text = "0,000";
+            DownVoltageText.Text = "0,000";
             GndButton.Opacity= 0;
             UsbButton.Opacity= 0;
             RtcButton.Opacity= 0;   
@@ -100,23 +98,11 @@ namespace ЭВМ
             {
                 if (compare[0].isGND || compare[1].isGND) //если мерим м/у gnd и элементом
                 {
-                    VoltageText.Text = "" + ((float)Convert.ToDouble(compare[1].V) - (float)Convert.ToDouble(compare[0].V));
-                    if (compare[0].isGND)
-                    {
-                        AmperText.Text = compare[1].A;
-                        ResistText.Text = compare[1].R;
-                    }
-                    else
-                    {
-                        AmperText.Text = compare[0].A;
-                        ResistText.Text = compare[0].R;
-                    }
+                    DownVoltageText.Text = "" + ((float)Convert.ToDouble(compare[1].V) - (float)Convert.ToDouble(compare[0].V));
                 }
                 else 
                 {
-                    AmperText.Text = "???";
-                    VoltageText.Text = "???";
-                    ResistText.Text = "???";
+                    DownVoltageText.Text = "???";
                 }
                 AorusB450.refresh(1);
             }
@@ -322,12 +308,12 @@ namespace ЭВМ
 
         private void Plus_Click(object sender, RoutedEventArgs e)
         {
-            /*Minus.IsChecked = false;*/
+            Minus.IsChecked = false;
         }
 
         private void Minus_Click(object sender, RoutedEventArgs e)
         {
-           /* Plus.IsChecked = false;*/
+           Plus.IsChecked = false;
         }
 
 
@@ -381,6 +367,11 @@ namespace ЭВМ
         }
 
         private void RtcButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

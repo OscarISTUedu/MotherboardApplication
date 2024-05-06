@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ЭВМ"
         mc:Ignorable="d"
-        Title="PC Pocket Diagnostics" Height="820" Width="1200"
+        Title="PC Pocket Diagnostics" Height="1050" Width="1200"
         ResizeMode="NoResize">
     <Window.Resources>
         <!-- создан свой стиль кнопки чтобы при наведении она не подсвечивалась -->
@@ -89,7 +89,7 @@
 
                 </TabItem>
 
-                <TabItem x:Name="Multimeter" Header="Мультиметр" MouseLeftButtonUp="Tab_Click">
+                <TabItem x:Name="Voltmetr" Header="Вольтметр" MouseLeftButtonUp="Tab_Click">
                     <TabItem.Content>
                         <StackPanel>
                             <Grid x:Name="Inside" Height="758" >
@@ -102,32 +102,27 @@
                                     <RowDefinition Height="0.3*"></RowDefinition>
                                     <RowDefinition Height="0.6*"></RowDefinition>
                                     <RowDefinition Height="0.3*"></RowDefinition>
-                                    <RowDefinition Height="0.6*"></RowDefinition>
-                                    <RowDefinition Height="0.3*"></RowDefinition>
-                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition Height="0*"></RowDefinition>
+                                    <RowDefinition Height="0*"></RowDefinition>
+                                    <RowDefinition Height="0.7*"></RowDefinition>
                                     <RowDefinition Height="0.2*"></RowDefinition>
-                                    <RowDefinition Height="0.4*"></RowDefinition>
+                                    <RowDefinition Height="0.3*"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <CheckBox x:Name="Plus"  IsChecked="False" Grid.Row="7" Grid.Column="0" Height="30" Content="Плюс" HorizontalAlignment="Center" Click="Plus_Click" ></CheckBox>
                                 <CheckBox x:Name="Minus" IsChecked="False" Grid.Row="7" Grid.Column="1" Height="30" Content="Минус" HorizontalAlignment="Center" Click="Minus_Click"></CheckBox>
                                 <Grid x:Name="NumbersVoltage"  Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalAlignment="Center" >
                                     <StackPanel  Orientation="Horizontal" Margin="2">
-                                        <TextBlock x:Name="VoltageText" Opacity="0.6" Foreground="Red" FontSize="39" Text="0,000"  FontFamily="DSEG7 Classic Mini" ></TextBlock>
+                                        <TextBlock x:Name="DownVoltageText" Opacity="0.6" Foreground="Red" FontSize="39" Text="0,000"  FontFamily="DSEG7 Classic Mini" ></TextBlock>
                                     </StackPanel>
                                 </Grid>
-                                <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" >Напряжение(мВ)</TextBox>
+                                <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" TextChanged="TextBox_TextChanged" >Падение напряжение(мВ)</TextBox>
                                 <Grid x:Name="NumbersAmpers" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalAlignment="Center">
-                                    <StackPanel  Orientation="Horizontal" Margin="2">
-                                        <TextBlock x:Name="AmperText" Opacity="0.6" Foreground="Red" FontSize="39" Text="0,000" FontFamily="DSEG7 Classic Mini" ></TextBlock>
-                                    </StackPanel>
+                                   
                                 </Grid>
-                                <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" >Сила Тока(А)</TextBox>
-                                <Grid x:Name="NumberResistance" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalAlignment="Center">
-                                    <StackPanel  Orientation="Horizontal" Margin="2">
-                                        <TextBlock x:Name="ResistText" Opacity="0.6" Foreground="Red" FontSize="39" Text="0,000" FontFamily="DSEG7 Classic Mini" ></TextBlock>
-                                    </StackPanel>
+                                <Grid x:Name="KZ" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalAlignment="Center">
+                                    <Ellipse x:Name="IsKz" Width="20" Height="20" Fill="LightBlue" Stroke="Black" ></Ellipse>
                                 </Grid>
-                                <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" >Сопротивление(КОм)</TextBox>
+                                <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" >Короткое замыкание</TextBox>
                                 <Rectangle Grid.Column="0" Grid.Row="6" StrokeThickness="2" Margin="5,5,5,5">
                                     <Rectangle.Fill>
                                         <ImageBrush ImageSource="/MultimimeterRedPin.png"/>
@@ -151,14 +146,14 @@
             </TabControl>
 
             <Grid x:Name="GND" Grid.Column="0" Grid.Row="0" MouseMove="ContentPanel_MouseMove" Panel.ZIndex="1">
-                <Button x:Name="GndButton" Panel.ZIndex="1" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="GndClick" Content="GND" FontSize="22" Foreground="LightGray" Width="88" Height="409" Margin="0,-370,782,0"  MouseEnter="ContentPanel_MouseEnter" ></Button>
+                <Button x:Name="GndButton" Panel.ZIndex="1" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="GndClick" Content="GND" FontSize="22" Foreground="LightGray" Width="88" Height="528" Margin="0,-488,782,0"  MouseEnter="ContentPanel_MouseEnter" ></Button>
             </Grid>
 
-            <Grid x:Name="RTC" Width="20" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="564,542,302,185" Focusable="False" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Panel.ZIndex="1">
+            <Grid x:Name="RTC" Width="20" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="564,647,299,179" Focusable="False" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Panel.ZIndex="1">
                 <Button x:Name="RtcButton" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Rtc_Click" Content="RTC" FontSize="5" Foreground="LightGray" Grid.IsSharedSizeScope="True" />
             </Grid>
 
-            <Grid x:Name="USB1" HorizontalAlignment="Left" Height="22" VerticalAlignment="Bottom" Width="59" Margin="472,0,0,12" Grid.Column="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Panel.ZIndex="1">
+            <Grid x:Name="USB1" HorizontalAlignment="Left" Height="22" VerticalAlignment="Bottom" Width="59" Margin="479,0,0,19" Grid.Column="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Panel.ZIndex="1">
                 <Button x:Name="UsbButton" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="UsbClick" Content="USB1" FontSize="5" Foreground="LightGray"  />
             </Grid>
             
