@@ -73,16 +73,57 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
           
-            <Grid>
-                <Image x:Name="MotherBoardImage" Grid.Column="0" Source="/AorusB450Elite.jpg" Stretch="Fill" Visibility="Hidden"  MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" MouseLeave="ContentPanel_MouseLeave"></Image>
-                <Canvas IsHitTestVisible="False" Name="MagnifierPanel" Visibility="Hidden" >
-                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle" Height="100" Width="100" >
+            
+                <Image x:Name="MotherBoardImage" Grid.Column="0" Source="/AorusB450Elite.jpg" Stretch="Fill" Visibility="Hidden"   MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" MouseLeave="ContentPanel_MouseLeave"></Image>
+                <Canvas IsHitTestVisible="False" Name="MagnifierPanel" Visibility="Hidden" Panel.ZIndex="1" >
+                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle" Height="100" Width="100"  >
                         <Ellipse.Fill>
                             <VisualBrush x:Name="MagnifierBrush"  Visual="{Binding ElementName=MotherBoardImage}" ViewboxUnits="Absolute"/>
                         </Ellipse.Fill>
                     </Ellipse>
+                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle1" Height="100" Width="100"  >
+                        <Ellipse.Fill>
+                            <VisualBrush x:Name="MagnifierBrush1"  Visual="{Binding ElementName=GndButton}" ViewboxUnits="Absolute"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle2" Height="100" Width="100"  >
+                        <Ellipse.Fill>
+                            <VisualBrush x:Name="MagnifierBrush2"  Visual="{Binding ElementName=RtcButton}" ViewboxUnits="Absolute"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle3" Height="100" Width="100"  >
+                        <Ellipse.Fill>
+                            <VisualBrush x:Name="MagnifierBrush3"  Visual="{Binding ElementName=GndUsb1_1}" ViewboxUnits="Absolute"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle4" Height="100" Width="100"  >
+                        <Ellipse.Fill>
+                            <VisualBrush x:Name="MagnifierBrush4"  Visual="{Binding ElementName=GndUsb1_2}" ViewboxUnits="Absolute"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle5" Height="100" Width="100"  >
+                        <Ellipse.Fill>
+                            <VisualBrush x:Name="MagnifierBrush5"  Visual="{Binding ElementName=Usb1_1}" ViewboxUnits="Absolute"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle6" Height="100" Width="100"  >
+                        <Ellipse.Fill>
+                            <VisualBrush x:Name="MagnifierBrush6"  Visual="{Binding ElementName=Usb1_2}" ViewboxUnits="Absolute"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle7" Height="100" Width="100"  >
+                        <Ellipse.Fill>
+                            <VisualBrush x:Name="MagnifierBrush7"  Visual="{Binding ElementName=Usb1_3}" ViewboxUnits="Absolute"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle8" Height="100" Width="100"  >
+                        <Ellipse.Fill>
+                            <VisualBrush x:Name="MagnifierBrush8"  Visual="{Binding ElementName=Usb1_4}" ViewboxUnits="Absolute"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+
                 </Canvas>
-            </Grid>
+            
 
             <TabControl  Name="ToolsPages" Grid.Column="1" Visibility="Hidden">
                 <TabItem x:Name="Oscilloscope" Header="Осцилограф"  MouseLeftButtonUp="Tab_Click">
@@ -145,14 +186,14 @@
                 <TabItem x:Name="Totals"  Header="Выводы" MouseLeftButtonUp="Tab_Click">
                 </TabItem>
             </TabControl>
-                <Button x:Name="GndButton" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Anyclick" Content="GND" FontSize="22" Foreground="LightGray" Width="88" Height="528" Margin="0,-488,782,0"></Button>
-                <Button x:Name="RtcButton" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Anyclick" Content="RTC" FontSize="20" Foreground="LightGray" Grid.IsSharedSizeScope="True" Width="70" Height="60" Margin="-285,-118,0,0" />
-                <Button x:Name="GndUsb1_1" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Anyclick" Content="GND" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,987,-91,0"></Button>
-                <Button x:Name="GndUsb1_2" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Anyclick" Content="GND" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,967,-91,0"></Button>
-                <Button x:Name="Usb1_1" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,967,-111,0"  />
-                <Button x:Name="Usb1_2" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,987,-111,0"  />
-                <Button x:Name="Usb1_3" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,987,-132,0"  />
-                <Button x:Name="Usb1_4" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,967,-132,0"  />
+            <Button x:Name="GndButton" Style="{StaticResource  MyButtonStyle}" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Opacity="0" Click="Anyclick" Content="GND" FontSize="22" Foreground="LightGray" Width="88" Height="528" Margin="0,-488,782,0"></Button>
+            <Button x:Name="RtcButton" Style="{StaticResource  MyButtonStyle}" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Opacity="0" Click="Anyclick" Content="RTC" FontSize="20" Foreground="LightGray" Width="70" Height="60" Margin="-285,-118,0,0" />
+            <Button x:Name="GndUsb1_1" Style="{StaticResource  MyButtonStyle}" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Opacity="0" Click="Anyclick" Content="GND" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,987,-91,0"></Button>
+            <Button x:Name="GndUsb1_2" Style="{StaticResource  MyButtonStyle}" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Opacity="0" Click="Anyclick" Content="GND" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,967,-91,0"></Button>
+            <Button x:Name="Usb1_1" Style="{StaticResource  MyButtonStyle}" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Opacity="0" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,967,-111,0"  />
+            <Button x:Name="Usb1_2" Style="{StaticResource  MyButtonStyle}" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Opacity="0" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,987,-111,0"  />
+            <Button x:Name="Usb1_3" Style="{StaticResource  MyButtonStyle}" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Opacity="0" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,987,-132,0"  />
+            <Button x:Name="Usb1_4" Style="{StaticResource  MyButtonStyle}" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Opacity="0" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,967,-132,0"  />
         </Grid>
 
     </Grid>
