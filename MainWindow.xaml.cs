@@ -71,8 +71,12 @@ namespace ЭВМ
             double radius = length / 2;
             Rect viewboxRect = new Rect(center.X - radius, center.Y - radius, length, length);
             MagnifierBrush.Viewbox = viewboxRect;
+
             MagnifierCircle.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
             MagnifierCircle.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
+
+            /*MagnifierCircleRtc.SetValue(Canvas.LeftProperty, center.X - MagnifierCircleRtc.ActualWidth / 2);
+            MagnifierCircleRtc.SetValue(Canvas.TopProperty, center.Y - MagnifierCircleRtc.ActualHeight / 2);*/
         }
 
         private void ContentPanel_MouseEnter(object sender, MouseEventArgs e)
