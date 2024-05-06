@@ -54,8 +54,12 @@ namespace ЭВМ
         private void Zoom(object sender, RoutedEventArgs e)
         {
             isZoomed=!isZoomed;
-            if (isZoomed) MagnifierPanel.Visibility= Visibility.Visible;
-            else MagnifierPanel.Visibility= Visibility.Collapsed;
+            if (isZoomed) 
+            {
+                Zoomer.Background = Brushes.DarkGray;
+            }
+            else { Zoomer.Background = Brushes.LightGray; }
+            /*if (isZoomed) MagnifierPanel.Visibility= Visibility.Visible;*/
         }
 
         private void ContentPanel_MouseMove(object sender, MouseEventArgs e)
@@ -75,19 +79,16 @@ namespace ЭВМ
         {
             if (!isZoomed)
                 return;
-            MagnifierCircle.Visibility = Visibility.Visible;
+            if (isZoomed) MagnifierPanel.Visibility = Visibility.Visible;
+
         }
 
         private void ContentPanel_MouseLeave(object sender, MouseEventArgs e)
         {
             if (!isZoomed)
                 return;
-            MagnifierCircle.Visibility = Visibility.Hidden;
+            MagnifierPanel.Visibility = Visibility.Hidden;
         }
-
-
-
-
 
         private void update(object sender, EventArgs e)
         {

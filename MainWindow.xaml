@@ -15,7 +15,6 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        
                         <Border Name="border"
 						BorderBrush="DarkGray"
 						CornerRadius="3"
@@ -26,8 +25,32 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            
         </Style>
+
+
+        <Style x:Key="ColorChangingButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border"
+			                BorderBrush="Black"
+                            BorderThickness="1"
+			                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Триггер для подсветки при наведении -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FFD3E9FD"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Window.Resources>
 
     
@@ -51,8 +74,8 @@
             </Grid.ColumnDefinitions>
             <Grid>
                 <Image x:Name="MotherBoardImage" Grid.Column="0" Source="/AorusB450Elite.jpg" Stretch="Fill" Visibility="Hidden"  MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" MouseLeave="ContentPanel_MouseLeave"></Image>
-                <Canvas IsHitTestVisible="False" Name="MagnifierPanel" Visibility="Collapsed">
-                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle" Height="100" Width="100">
+                <Canvas IsHitTestVisible="False" Name="MagnifierPanel" Visibility="Hidden">
+                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle" Height="100" Width="100" >
                         <Ellipse.Fill>
                             <VisualBrush x:Name="MagnifierBrush"  Visual="{Binding ElementName=MotherBoardImage}" ViewboxUnits="Absolute"/>
                         </Ellipse.Fill>
@@ -116,7 +139,7 @@
                                     </Rectangle.Fill>
                                 </Rectangle>
                                 <Button x:Name="Clear" Content="Очистить" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="1" Margin="5,15,5,15" FontSize="22" HorizontalContentAlignment="Center" UseLayoutRounding="True" Click="StopGenering" />
-                                <Button x:Name="Zoomer" Content="Лупа" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="1" Margin="5,15,5,15" FontSize="22" HorizontalContentAlignment="Center" UseLayoutRounding="True" Click="Zoom" />
+                                <Button x:Name="Zoomer" Content="Лупа"  Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="1" Margin="5,15,5,15" FontSize="22" HorizontalContentAlignment="Center" UseLayoutRounding="True" Click="Zoom" Style="{StaticResource  ColorChangingButton}" Background="#FFDCDCDC"/>
                                 
                             </Grid>
                         </StackPanel>
@@ -128,7 +151,7 @@
             </TabControl>
 
             <Grid x:Name="GND" Grid.Column="0" Grid.Row="0" MouseMove="ContentPanel_MouseMove">
-                <Button x:Name="GndButton" Grid.Column="0" Grid.Row="0" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="GndClick" Content="GND" FontSize="22" Foreground="LightGray" Width="88" Height="409" Margin="0,-370,782,0"  MouseEnter="ContentPanel_MouseEnter" ></Button>
+                <Button x:Name="GndButton" Style="{StaticResource  MyButtonStyle}" Background="Black" Opacity="0" Click="GndClick" Content="GND" FontSize="22" Foreground="LightGray" Width="88" Height="409" Margin="0,-370,782,0"  MouseEnter="ContentPanel_MouseEnter" ></Button>
             </Grid>
 
             <Grid x:Name="RTC" Width="20" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="564,542,302,185" Focusable="False" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter">
