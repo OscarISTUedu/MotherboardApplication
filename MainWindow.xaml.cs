@@ -3,6 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Media;
 using System.Printing;
 using System.Security.AccessControl;
 using System.Text;
@@ -15,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
 
 
@@ -32,10 +34,14 @@ namespace ЭВМ
         private double _factor = 0.5;//масштаб
         bool isZoomed = false;
         bool isGenering = false;
+        private SoundPlayer soundPlayer;
         public MainWindow()
         {
             InitializeComponent();
             ResizeMode = ResizeMode.NoResize;
+            string soundFilePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kz_sound.wav"); // Замените на путь к вашему аудиофайлу
+            soundPlayer = new SoundPlayer(soundFilePath);
+            // Инициализируем SoundPlayer с путем к аудиофайлу
         }
 
         private void StopGenering(object sender, EventArgs e)
@@ -44,14 +50,16 @@ namespace ЭВМ
             isGenering = false;
             Array.Clear(compare,0 ,compare.Length);
             DownVoltageText.Text = "0,000";
-            GndButton.Opacity= 0;
-            RtcButton.Opacity= 0;
-            GndUsb1_1.Opacity= 0;
-            GndUsb1_2.Opacity= 0;
-            Usb1_1.Opacity= 0;
-            Usb1_2.Opacity= 0;
-            Usb1_3.Opacity= 0;
-            Usb1_4.Opacity= 0;
+            /*elements.Opacity = 0;*/
+            GndButton.Opacity = 0;
+            RtcButton.Opacity = 0;
+            GndUsb1_1.Opacity = 0;
+            GndUsb1_2.Opacity = 0;
+            Usb1_1.Opacity = 0;
+            Usb1_2.Opacity = 0;
+            Usb1_3.Opacity = 0;
+            Usb1_4.Opacity = 0;
+            IsKz.Fill = Brushes.LightBlue;
             Plus.IsHitTestVisible = true;
             Minus.IsHitTestVisible = true;
         }
@@ -160,6 +168,11 @@ namespace ЭВМ
 
         private void Anyclick(object sender, RoutedEventArgs e)
         {
+            /*try 
+            { */
+            /*soundPlayer.Play();*/
+            /*}
+            catch  { Trace.WriteLine("???"); };   */
             if ((bool)Minus.IsChecked)//обработка выделения GND. compare[0] - это минус,compare[1] - плюс
             {
                 Button button = sender as Button;
@@ -188,15 +201,11 @@ namespace ЭВМ
                         }
                         if (GetNumOfElem(compare) == 2)
                         {
-                            if (compare[0] != compare[1])
-                            {
-                                CompositionTarget.Rendering += update;
-                                Plus.IsHitTestVisible = false;
-                                Minus.IsHitTestVisible = false;
-                                return;
-                            }
-                            Array.Clear(compare, 0, 1);
-                        }
+                            CompositionTarget.Rendering += update;
+                            if ((compare[0].isGND) && (compare[1].isGND)) { IsKz.Fill = Brushes.Red;  }
+                            Plus.IsHitTestVisible = false;
+                            Minus.IsHitTestVisible = false;
+                        }else { Minus.IsHitTestVisible = false; }
                     }
                     catch (Exception ex)
                     {
@@ -232,15 +241,11 @@ namespace ЭВМ
                         }
                         if (GetNumOfElem(compare) == 2)
                         {
-                            if (compare[0] != compare[1])
-                            {
-                                CompositionTarget.Rendering += update;
-                                Plus.IsHitTestVisible = false;
-                                Minus.IsHitTestVisible = false;
-                                return;
-                            }
-                            Array.Clear(compare, 1, compare.Length);
-                        }
+                            CompositionTarget.Rendering += update;
+                            if ((compare[0].isGND) && (compare[1].isGND)) { IsKz.Fill = Brushes.Red;  }
+                            Plus.IsHitTestVisible = false;
+                            Minus.IsHitTestVisible = false;
+                        } else {Plus.IsHitTestVisible = false;}
                     }
                     catch (Exception ex)
                     {
@@ -250,8 +255,11 @@ namespace ЭВМ
             }
         }
 
+        /*private void MediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            mediaElement.Stop(); // Остановка звука по завершении воспроизведения
+        }*/
 
-        
 
         public void Tab_Click(object sender, RoutedEventArgs e)
         {
@@ -338,15 +346,17 @@ namespace ЭВМ
             public Elem rtc;
             public Elem gnd;
             public Elem usb;
-
+            public Elem line_5B;
+            public Elem line_12B;
+            public Elem line_3_3B;
             public void refresh(int branching)
             {
                 switch (branching)
                 {                      //от 0.450мВ до 0.7мВ
                     case 1://всё исправно
-                        usb.Fill(usb.V.Substring(0,3) + rnd.Next(10, 100), (""+((float)Convert.ToDouble(usb.V)* Math.Pow(10,3) / ((float)Convert.ToDouble(usb.A)*Math.Pow(10,3)))).Substring(0,4), "0," + 5);//v,r,a
-                        gnd.Fill("0", "0", "0");
-                        rtc.Fill("0", "0", "0");
+                        usb.Fill(usb.V.Substring(0,3) + rnd.Next(10, 100));//v,r,a
+                        gnd.Fill("0");
+                        rtc.Fill("0");
                         /*Trace.WriteLine(usb.R);*/
                         /*Trace.WriteLine(((float)Convert.ToDouble(usb.V) * Math.Pow(10, -3) / (float)Convert.ToDouble(usb.A)));
                         Trace.WriteLine(usb.R);*/
@@ -369,9 +379,11 @@ namespace ЭВМ
                 switch (branching)
                 {          //от 0.450мВ до 0.7мВ
                     case 1://всё исправно
-                        usb.Fill("0,"+rnd.Next(4,7)+rnd.Next(10,100), "1", "0," + 5);//v,r,a
-                        gnd.Fill("0", "0", "0");
-                        rtc.Fill("0", "0", "0");
+                        usb.Fill("0,"+rnd.Next(4,7)+rnd.Next(10,100));
+                        gnd.Fill("0");
+                        rtc.Fill("0");
+                        usb.Fill("0,"+rnd.Next(4,7)+rnd.Next(10,100));
+
                         /*rtc.Fill();*/
                         break;
                     case 2:////часы не работают - не работает южный порт
@@ -400,22 +412,19 @@ public class Elem
     {
         public bool isGND=false;
         public string V;//напряжение
-        public string R;//сопротивление
-        public string A;//сила тока
+
         public Elem(bool GND)
         {
-        V = ""; R=""; A=""; isGND = GND;
+        V = ""; isGND = GND;
         }
 
         public Elem()
         {
-            V = ""; R = ""; A = "";
+            V = "";
         }
-        public void Fill(string v, string r, string a)
+        public void Fill(string v)
         {
             V = v;//напряжение
-            R = r;//сопротивление
-            A = a;//сила тока
         }
     }
 
@@ -444,7 +453,6 @@ public class Elem
         return k;
         }
 
-        /*public static */
     }
 
 
