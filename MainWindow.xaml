@@ -20,7 +20,7 @@
 						CornerRadius="3"
                         BorderThickness="1"
 						Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -53,9 +53,9 @@
 
     </Window.Resources>
 
-    
-      
-    
+
+
+
 
 
 
@@ -72,62 +72,77 @@
                 <ColumnDefinition Width="3*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-          
-            
-                <Image x:Name="MotherBoardImage" Grid.Column="0" Source="/AorusB450Elite.jpg" Stretch="Fill" Visibility="Hidden"   MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" MouseLeave="ContentPanel_MouseLeave"></Image>
-                <Canvas IsHitTestVisible="False" Name="MagnifierPanel" Visibility="Hidden" Panel.ZIndex="1" >
-                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle" Height="100" Width="100"  >
-                        <Ellipse.Fill>
-                            <VisualBrush x:Name="MagnifierBrush"  Visual="{Binding ElementName=MotherBoardImage}" ViewboxUnits="Absolute"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle1" Height="100" Width="100"  >
-                        <Ellipse.Fill>
-                            <VisualBrush x:Name="MagnifierBrush1"  Visual="{Binding ElementName=GndButton}" ViewboxUnits="Absolute"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle2" Height="100" Width="100"  >
-                        <Ellipse.Fill>
-                            <VisualBrush x:Name="MagnifierBrush2"  Visual="{Binding ElementName=RtcButton}" ViewboxUnits="Absolute"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle3" Height="100" Width="100"  >
-                        <Ellipse.Fill>
-                            <VisualBrush x:Name="MagnifierBrush3"  Visual="{Binding ElementName=GndUsb1_1}" ViewboxUnits="Absolute"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle4" Height="100" Width="100"  >
-                        <Ellipse.Fill>
-                            <VisualBrush x:Name="MagnifierBrush4"  Visual="{Binding ElementName=GndUsb1_2}" ViewboxUnits="Absolute"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle5" Height="100" Width="100"  >
-                        <Ellipse.Fill>
-                            <VisualBrush x:Name="MagnifierBrush5"  Visual="{Binding ElementName=Usb1_1}" ViewboxUnits="Absolute"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle6" Height="100" Width="100"  >
-                        <Ellipse.Fill>
-                            <VisualBrush x:Name="MagnifierBrush6"  Visual="{Binding ElementName=Usb1_2}" ViewboxUnits="Absolute"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle7" Height="100" Width="100"  >
-                        <Ellipse.Fill>
-                            <VisualBrush x:Name="MagnifierBrush7"  Visual="{Binding ElementName=Usb1_3}" ViewboxUnits="Absolute"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <Ellipse Stroke="LightBlue" Name="MagnifierCircle8" Height="100" Width="100"  >
-                        <Ellipse.Fill>
-                            <VisualBrush x:Name="MagnifierBrush8"  Visual="{Binding ElementName=Usb1_4}" ViewboxUnits="Absolute"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
 
-                </Canvas>
-            
 
-            <TabControl  Name="ToolsPages" Grid.Column="1" Visibility="Hidden">
+            <Image x:Name="MotherBoardImage" Grid.Column="0" Source="/AorusB450Elite.jpg" Stretch="Fill" Visibility="Visible"   MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" MouseLeave="ContentPanel_MouseLeave"></Image>
+            <Canvas IsHitTestVisible="False" Name="MagnifierPanel" Visibility="Hidden" Panel.ZIndex="1" >
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush"  Visual="{Binding ElementName=MotherBoardImage}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle1" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush1"  Visual="{Binding ElementName=GndButton}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle2" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush2"  Visual="{Binding ElementName=RtcButton}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle3" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush3"  Visual="{Binding ElementName=GndUsb1_1}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle4" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush4"  Visual="{Binding ElementName=GndUsb1_2}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle5" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush5"  Visual="{Binding ElementName=Usb1_1}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle6" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush6"  Visual="{Binding ElementName=Usb1_2}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle7" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush7"  Visual="{Binding ElementName=Usb1_3}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle8" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush8"  Visual="{Binding ElementName=Usb1_4}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+
+            </Canvas>
+
+
+            <TabControl  Name="ToolsPages" Grid.Column="1" Visibility="Visible">
                 <TabItem x:Name="Oscilloscope" Header="Осцилограф"  MouseLeftButtonUp="Tab_Click">
-
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.4*"></RowDefinition>
+                            <RowDefinition Height="0.3*"></RowDefinition>
+                            <RowDefinition Height="0.1*"></RowDefinition>
+                            <RowDefinition Height="0.3*"></RowDefinition>
+                            <RowDefinition Height="0*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="Good_synk" > </Image>
+                        
+                        
+                    </Grid>
                 </TabItem>
 
                 <TabItem x:Name="Voltmetr" Header="Вольтметр" MouseLeftButtonUp="Tab_Click">
@@ -135,8 +150,10 @@
                         <StackPanel>
                             <Grid x:Name="Inside" Height="758" >
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="12*"></ColumnDefinition>
+                                    <ColumnDefinition Width="23*"/>
+                                    <ColumnDefinition Width="113*"/>
+                                    <ColumnDefinition Width="147*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="0.6*"></RowDefinition>
@@ -149,40 +166,38 @@
                                     <RowDefinition Height="0.2*"></RowDefinition>
                                     <RowDefinition Height="0.3*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <CheckBox x:Name="Plus"  IsChecked="False" Grid.Row="7" Grid.Column="0" Height="30" Content="Плюс" HorizontalAlignment="Center" Click="Plus_Click" ></CheckBox>
-                                <CheckBox x:Name="Minus" IsChecked="False" Grid.Row="7" Grid.Column="1" Height="30" Content="Минус" HorizontalAlignment="Center" Click="Minus_Click"></CheckBox>
-                                <Grid x:Name="NumbersVoltage"  Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalAlignment="Center" >
+                                <CheckBox x:Name="Plus"  IsChecked="False" Grid.Row="7" Grid.Column="2" Height="30" Content="Плюс" HorizontalAlignment="Left" Click="Plus_Click" Margin="14,10,0,10" ></CheckBox>
+                                <CheckBox x:Name="Minus" IsChecked="False" Grid.Row="7" Grid.Column="3" Height="30" Content="Минус" HorizontalAlignment="Center" Click="Minus_Click" Margin="0,10,0,10"></CheckBox>
+                                <Grid x:Name="NumbersVoltage"  Grid.Column="2" HorizontalAlignment="Left" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="64,0,0,0" >
                                     <StackPanel  Orientation="Horizontal" Margin="2">
                                         <TextBlock x:Name="DownVoltageText" Opacity="0.6" Foreground="Red" FontSize="39" Text="0,000"  FontFamily="DSEG7 Classic Mini" ></TextBlock>
                                     </StackPanel>
                                 </Grid>
-                                <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" >Падение напряжение(мВ)</TextBox>
-                                <Grid x:Name="NumbersAmpers" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalAlignment="Center">
-                                   
-                                </Grid>
-                                <Grid x:Name="KZ" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalAlignment="Center">
+                                <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" >Падение напряжение(мВ)</TextBox>
+                                <Grid x:Name="NumbersAmpers" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="112,0,0,0"/>
+                                <Grid x:Name="KZ" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="102,0,0,0">
                                     <Ellipse x:Name="IsKz" Width="20" Height="20" Fill="LightBlue" Stroke="Black" ></Ellipse>
                                 </Grid>
-                                <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" >Короткое замыкание</TextBox>
-                                <Rectangle Grid.Column="0" Grid.Row="6" StrokeThickness="2" Margin="5,5,5,5">
+                                <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" Margin="0,0,0,177" Grid.RowSpan="4" >Короткое замыкание</TextBox>
+                                <Rectangle Grid.Column="0" Grid.Row="6" StrokeThickness="2" Margin="5,5,5,5" Grid.ColumnSpan="3">
                                     <Rectangle.Fill>
                                         <ImageBrush ImageSource="/MultimimeterRedPin.png"/>
                                     </Rectangle.Fill>
                                 </Rectangle>
-                                <Rectangle Grid.Column="1" Grid.Row="6" Margin="5,5,5,5">
+                                <Rectangle Grid.Column="3" Grid.Row="6" Margin="5,5,5,5">
                                     <Rectangle.Fill>
                                         <ImageBrush ImageSource="/MultimimeterPinBlack.png"/>
                                     </Rectangle.Fill>
                                 </Rectangle>
-                                <Button x:Name="Clear" Content="Очистить" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="1" Margin="5,15,5,15" FontSize="22" HorizontalContentAlignment="Center" UseLayoutRounding="True" Click="StopGenering" />
-                                <Button x:Name="Zoomer" Content="Лупа"  Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="1" Margin="5,15,5,15" FontSize="22" HorizontalContentAlignment="Center" UseLayoutRounding="True" Click="Zoom" Style="{StaticResource  ColorChangingButton}" Background="#FFDCDCDC"/>
-                                
+                                <Button x:Name="Clear" Content="Очистить" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="3" Margin="5,15,5,15" FontSize="22" HorizontalContentAlignment="Center" UseLayoutRounding="True" Click="StopGenering" />
+                                <Button x:Name="Zoomer" Content="Лупа"  Grid.Column="3" Grid.Row="8" Grid.ColumnSpan="1" Margin="5,15,5,15" FontSize="22" HorizontalContentAlignment="Center" UseLayoutRounding="True" Click="Zoom" Style="{StaticResource  ColorChangingButton}" Background="#FFDCDCDC"/>
+
                             </Grid>
                         </StackPanel>
                     </TabItem.Content>
                 </TabItem>
 
-                
+
                 <TabItem x:Name="Totals"  Header="Выводы" MouseLeftButtonUp="Tab_Click">
                 </TabItem>
             </TabControl>
@@ -197,7 +212,7 @@
             <Button x:Name="Usb1_4" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,967,-132,0"  />
             <Button x:Name="Usb1_5B_1" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="5B" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,967,-151,0"  />
             <Button x:Name="Usb1_5B_2" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="5B" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,987,-151,0"  />
-                
+
         </Grid>
 
     </Grid>

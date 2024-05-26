@@ -15,6 +15,8 @@
     <None Remove="MultimimeterPinBlack.png" />
     <None Remove="MultimimeterPins.png" />
     <None Remove="MultimimeterRedPin.png" />
+    <None Remove="syn_bad.png" />
+    <None Remove="syn_good.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +36,8 @@
     <Resource Include="MotherBoard.png" />
     <Resource Include="MultimimeterPinBlack.png" />
     <Resource Include="MultimimeterRedPin.png" />
+    <Resource Include="syn_bad.png" />
+    <Resource Include="syn_good.png" />
   </ItemGroup>
 
 	
