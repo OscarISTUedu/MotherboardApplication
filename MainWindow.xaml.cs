@@ -35,22 +35,27 @@ namespace ЭВМ
         bool isZoomed = false;
         bool isGenering = false;
         private SoundPlayer soundPlayer;
-        string current_page = "";
+        string current_page = "Осцилограф";
         public MainWindow()
         {
             InitializeComponent();
             ResizeMode = ResizeMode.NoResize;
             string soundFilePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Kz_sound.wav"); // Замените на путь к вашему аудиофайлу
             soundPlayer = new SoundPlayer(soundFilePath);
+            ToolsPages.Visibility = Visibility.Hidden;
+            MotherBoardImage.Visibility = Visibility.Hidden;
             // Инициализируем SoundPlayer с путем к аудиофайлу
         }
 
         private void StopGenering(object sender, EventArgs e)
         {
-            CompositionTarget.Rendering -= update;
+            if (current_page == "Мультиметр") 
+            { CompositionTarget.Rendering -= update; 
+              DownVoltageText.Text = "0,000"; }
+            //CompositionTarget.Rendering -= update;
             isGenering = false;
             Array.Clear(compare,0 ,compare.Length);
-            DownVoltageText.Text = "0,000";
+            //DownVoltageText.Text = "0,000";
             /*elements.Opacity = 0;*/
             GndButton.Opacity = 0;
             RtcButton.Opacity = 0;
@@ -183,6 +188,9 @@ namespace ЭВМ
                             Plus_o.IsChecked = false;
                             switch (text)
                             {
+                                case "BIOS":
+                                    compare[0] = AorusB450.bios;
+                                    break;
                                 case "GND":
                                     compare[0] = AorusB450.gnd;
                                     break;
@@ -192,11 +200,12 @@ namespace ЭВМ
                                 case "USB":
                                     compare[0] = AorusB450.usb;
                                     break;
+                                
                             }
                             if (GetNumOfElem(compare) == 2)
                             {
-                                CompositionTarget.Rendering += update;
-                                if ((compare[0].isGND) && (compare[1].isGND)) { IsKz.Fill = Brushes.Red; }
+                                //логика осцилографа
+
                                 Plus_o.IsHitTestVisible = false;
                                 Minus_o.IsHitTestVisible = false;
                             }
@@ -221,6 +230,9 @@ namespace ЭВМ
                             Plus_o.IsChecked = false;
                             switch (text)
                             {
+                                case "BIOS":
+                                    compare[1] = AorusB450.bios;
+                                    break;
                                 case "GND":
                                     compare[1] = AorusB450.gnd;
                                     break;
@@ -233,8 +245,7 @@ namespace ЭВМ
                             }
                             if (GetNumOfElem(compare) == 2)
                             {
-                                CompositionTarget.Rendering += update;
-                                if ((compare[0].isGND) && (compare[1].isGND)) { IsKz.Fill = Brushes.Red; }
+                                //логика осцилографа
                                 Plus_o.IsHitTestVisible = false;
                                 Minus_o.IsHitTestVisible = false;
                             }
@@ -262,6 +273,9 @@ namespace ЭВМ
                             Plus.IsChecked = false;
                             switch (text)
                             {
+                                case "BIOS":
+                                    compare[0] = AorusB450.bios;
+                                    break;
                                 case "GND":
                                     compare[0] = AorusB450.gnd;
                                     break;
@@ -300,6 +314,9 @@ namespace ЭВМ
                             Plus.IsChecked = false;
                             switch (text)
                             {
+                                case "BIOS":
+                                    compare[1] = AorusB450.bios;
+                                    break;
                                 case "GND":
                                     compare[1] = AorusB450.gnd;
                                     break;
@@ -355,6 +372,10 @@ namespace ЭВМ
             {
                 current_page = "Осцилограф";
             }
+            else if (Source == "Выводы")
+            {
+                current_page = "Выводы";
+            }
 
             Trace.WriteLine(Source);
 
@@ -400,11 +421,13 @@ namespace ЭВМ
         private void Plus_Click(object sender, RoutedEventArgs e)
         {
             Minus.IsChecked = false;
+            Minus_o.IsChecked = false;
         }
 
         private void Minus_Click(object sender, RoutedEventArgs e)
         {
            Plus.IsChecked = false;
+           Plus_o.IsChecked = false;
         }
 
 
@@ -418,6 +441,7 @@ namespace ЭВМ
             public Elem line_5B;
             public Elem line_12B;
             public Elem line_3_3B;
+            public Elem bios;
             public void refresh(int branching)
             {
                 switch (branching)
@@ -445,6 +469,7 @@ namespace ЭВМ
                 rtc = new Elem();
                 usb = new Elem();
                 gnd = new Elem(true);
+                bios= new Elem();
                 switch (branching)
                 {          //от 0.450мВ до 0.7мВ
                     case 1://всё исправно

@@ -218,6 +218,7 @@
             </TabControl>
             <Button x:Name="GndButton" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black"  Click="Anyclick" Content="GND" FontSize="22" Foreground="LightGray" Width="88" Height="528" Margin="0,-488,782,0"></Button>
             <Button x:Name="RtcButton" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black"  Click="Anyclick" Content="RTC" FontSize="20" Foreground="LightGray" Width="70" Height="60" Margin="-285,-118,0,0" />
+            <Button x:Name="BIOSButton" Style="{StaticResource  MyButtonStyle}" Opacity="0.5" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black"  Click="Anyclick" Content="BIOS" FontSize="20" Foreground="LightGray" Width="50" Height="30" Margin="-177,1,0,0" />
 
             <Button x:Name="GndUsb1_1" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black"  Click="Anyclick" Content="GND" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,987,-91,0"></Button>
             <Button x:Name="GndUsb1_2" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black"  Click="Anyclick" Content="GND" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,967,-91,0"></Button>
