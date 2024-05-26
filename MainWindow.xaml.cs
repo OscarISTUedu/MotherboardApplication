@@ -35,6 +35,7 @@ namespace ЭВМ
         bool isZoomed = false;
         bool isGenering = false;
         private SoundPlayer soundPlayer;
+        string current_page = "";
         public MainWindow()
         {
             InitializeComponent();
@@ -62,20 +63,19 @@ namespace ЭВМ
             IsKz.Fill = Brushes.LightBlue;
             Plus.IsHitTestVisible = true;
             Minus.IsHitTestVisible = true;
+            Plus_o.IsHitTestVisible = true;
+            Minus_o.IsHitTestVisible = true;
         }
 
         private void Zoom(object sender, RoutedEventArgs e)
         {
-            /*if ((Plus.IsChecked == false)&&(Minus.IsChecked == false)&&(GetNumOfElem(compare)==0))
-            {*/
                 if (isZoomed) 
                 {
                     Zoomer.Background = Brushes.LightGray;
+                    Zoomer_o.Background = Brushes.LightGray;
                 }
-                else { Zoomer.Background = Brushes.DarkGray; }
+                else { Zoomer.Background = Brushes.DarkGray; Zoomer_o.Background = Brushes.DarkGray; }
                 isZoomed=!isZoomed;
-           /* }*/
-            /*if (isZoomed) MagnifierPanel.Visibility= Visibility.Visible;*/
         }
 
         private void ContentPanel_MouseMove(object sender, MouseEventArgs e)
@@ -168,91 +168,166 @@ namespace ЭВМ
 
         private void Anyclick(object sender, RoutedEventArgs e)
         {
-            /*try 
-            { */
-            /*soundPlayer.Play();*/
-            /*}
-            catch  { Trace.WriteLine("???"); };   */
-            if ((bool)Minus.IsChecked)//обработка выделения GND. compare[0] - это минус,compare[1] - плюс
+            if (current_page == "Осцилограф")
             {
-                Button button = sender as Button;
-                if (button!= null)
+                if ((bool)Minus_o.IsChecked)//обработка выделения GND. compare[0] - это минус,compare[1] - плюс
                 {
-                    try
+                    Button button = sender as Button;
+                    if (button != null)
                     {
-                        string text = button.Content.ToString(); 
-                        button.Opacity= 1;
-                        /*isZoomed = false;
-                        Zoomer.Background = Brushes.LightGray;
-                        MagnifierPanel.Visibility = Visibility.Hidden;*/
-                        Minus.IsChecked = false;
-                        Plus.IsChecked = false;
-                        switch (text)
+                        try
                         {
-                            case "GND":
-                                compare[0] = AorusB450.gnd;
-                                break;
-                            case "RTC":
-                                compare[0] = AorusB450.rtc;
-                                break;
-                            case "USB":
-                                compare[0] =AorusB450.usb;
-                                break;
+                            string text = button.Content.ToString();
+                            button.Opacity = 1;
+                            Minus_o.IsChecked = false;
+                            Plus_o.IsChecked = false;
+                            switch (text)
+                            {
+                                case "GND":
+                                    compare[0] = AorusB450.gnd;
+                                    break;
+                                case "RTC":
+                                    compare[0] = AorusB450.rtc;
+                                    break;
+                                case "USB":
+                                    compare[0] = AorusB450.usb;
+                                    break;
+                            }
+                            if (GetNumOfElem(compare) == 2)
+                            {
+                                CompositionTarget.Rendering += update;
+                                if ((compare[0].isGND) && (compare[1].isGND)) { IsKz.Fill = Brushes.Red; }
+                                Plus_o.IsHitTestVisible = false;
+                                Minus_o.IsHitTestVisible = false;
+                            }
+                            else { Minus_o.IsHitTestVisible = false; }
                         }
-                        if (GetNumOfElem(compare) == 2)
+                        catch (Exception ex)
                         {
-                            CompositionTarget.Rendering += update;
-                            if ((compare[0].isGND) && (compare[1].isGND)) { IsKz.Fill = Brushes.Red;  }
-                            Plus.IsHitTestVisible = false;
-                            Minus.IsHitTestVisible = false;
-                        }else { Minus.IsHitTestVisible = false; }
-                    }
-                    catch (Exception ex)
-                    {
-                        return;
+                            return;
+                        }
                     }
                 }
-            }
-            else if ((bool)Plus.IsChecked)//compare[0] - это минус,compare[1] - плюс
-            {
-                Button button = sender as Button;
-                if (button != null)
+                else if ((bool)Plus_o.IsChecked)//compare[0] - это минус,compare[1] - плюс
                 {
-                    try
+                    Button button = sender as Button;
+                    if (button != null)
                     {
-                        string text = button.Content.ToString();
-                        button.Opacity = 1;
-                       /* isZoomed = false;
-                        Zoomer.Background = Brushes.LightGray;
-                        MagnifierPanel.Visibility = Visibility.Hidden;*/
-                        Minus.IsChecked = false;
-                        Plus.IsChecked = false;
-                        switch (text)
+                        try
                         {
-                            case "GND":
-                                compare[1] = AorusB450.gnd;
-                                break;
-                            case "RTC":
-                                compare[1] = AorusB450.rtc;
-                                break;
-                            case "USB":
-                                compare[1] = AorusB450.usb;
-                                break;
+                            string text = button.Content.ToString();
+                            button.Opacity = 1;
+                            Minus_o.IsChecked = false;
+                            Plus_o.IsChecked = false;
+                            switch (text)
+                            {
+                                case "GND":
+                                    compare[1] = AorusB450.gnd;
+                                    break;
+                                case "RTC":
+                                    compare[1] = AorusB450.rtc;
+                                    break;
+                                case "USB":
+                                    compare[1] = AorusB450.usb;
+                                    break;
+                            }
+                            if (GetNumOfElem(compare) == 2)
+                            {
+                                CompositionTarget.Rendering += update;
+                                if ((compare[0].isGND) && (compare[1].isGND)) { IsKz.Fill = Brushes.Red; }
+                                Plus_o.IsHitTestVisible = false;
+                                Minus_o.IsHitTestVisible = false;
+                            }
+                            else { Plus_o.IsHitTestVisible = false; }
                         }
-                        if (GetNumOfElem(compare) == 2)
+                        catch (Exception ex)
                         {
-                            CompositionTarget.Rendering += update;
-                            if ((compare[0].isGND) && (compare[1].isGND)) { IsKz.Fill = Brushes.Red;  }
-                            Plus.IsHitTestVisible = false;
-                            Minus.IsHitTestVisible = false;
-                        } else {Plus.IsHitTestVisible = false;}
-                    }
-                    catch (Exception ex)
-                    {
-                        return;
+                            return;
+                        }
                     }
                 }
+            }  
+            if (current_page== "Мультиметр")
+            {
+                if ((bool)Minus.IsChecked)//обработка выделения GND. compare[0] - это минус,compare[1] - плюс
+                {
+                    Button button = sender as Button;
+                    if (button != null)
+                    {
+                        try
+                        {
+                            string text = button.Content.ToString();
+                            button.Opacity = 1;
+                            Minus.IsChecked = false;
+                            Plus.IsChecked = false;
+                            switch (text)
+                            {
+                                case "GND":
+                                    compare[0] = AorusB450.gnd;
+                                    break;
+                                case "RTC":
+                                    compare[0] = AorusB450.rtc;
+                                    break;
+                                case "USB":
+                                    compare[0] = AorusB450.usb;
+                                    break;
+                            }
+                            if (GetNumOfElem(compare) == 2)
+                            {
+                                CompositionTarget.Rendering += update;
+                                if ((compare[0].isGND) && (compare[1].isGND)) { IsKz.Fill = Brushes.Red; }
+                                Plus.IsHitTestVisible = false;
+                                Minus.IsHitTestVisible = false;
+                            }
+                            else { Minus.IsHitTestVisible = false; }
+                        }
+                        catch (Exception ex)
+                        {
+                            return;
+                        }
+                    }
+                }
+                else if ((bool)Plus.IsChecked)//compare[0] - это минус,compare[1] - плюс
+                {
+                    Button button = sender as Button;
+                    if (button != null)
+                    {
+                        try
+                        {
+                            string text = button.Content.ToString();
+                            button.Opacity = 1;
+                            Minus.IsChecked = false;
+                            Plus.IsChecked = false;
+                            switch (text)
+                            {
+                                case "GND":
+                                    compare[1] = AorusB450.gnd;
+                                    break;
+                                case "RTC":
+                                    compare[1] = AorusB450.rtc;
+                                    break;
+                                case "USB":
+                                    compare[1] = AorusB450.usb;
+                                    break;
+                            }
+                            if (GetNumOfElem(compare) == 2)
+                            {
+                                CompositionTarget.Rendering += update;
+                                if ((compare[0].isGND) && (compare[1].isGND)) { IsKz.Fill = Brushes.Red; }
+                                Plus.IsHitTestVisible = false;
+                                Minus.IsHitTestVisible = false;
+                            }
+                            else { Plus.IsHitTestVisible = false; }
+                        }
+                        catch (Exception ex)
+                        {
+                            return;
+                        }
+                    }
+                }
+
             }
+            
         }
 
         /*private void MediaElement_MediaEnded(object sender, RoutedEventArgs e)
@@ -274,11 +349,11 @@ namespace ЭВМ
             }
             if (Source == "Мультиметр")
             {
-
+                current_page = "Мультиметр";
             }
             else if (Source == "Осцилограф")
             {
-
+                current_page = "Осцилограф";
             }
 
             Trace.WriteLine(Source);
@@ -325,17 +400,11 @@ namespace ЭВМ
         private void Plus_Click(object sender, RoutedEventArgs e)
         {
             Minus.IsChecked = false;
-            /*isZoomed = false;
-            Zoomer.Background = Brushes.LightGray;
-            MagnifierPanel.Visibility = Visibility.Hidden;*/
         }
 
         private void Minus_Click(object sender, RoutedEventArgs e)
         {
            Plus.IsChecked = false;
-            /*isZoomed = false;
-            Zoomer.Background = Brushes.LightGray;
-            MagnifierPanel.Visibility = Visibility.Hidden;*/
         }
 
 
