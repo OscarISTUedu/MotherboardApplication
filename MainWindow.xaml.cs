@@ -43,6 +43,12 @@ namespace ЭВМ
         string[] brokes = { "Не исправен южный мост", "Неисправность RTC", "Неисправность микросхемы BIOS", "Короткое замыкание на линии 5V",
         "Короткое замыкание на линии 3.3V","Короткое замыкание на линии 12V","Неисправность слотов ОЗУ","Неисправность слотов PCI-E"};
         string broke;
+        List<int> arr_of_brokes = new List<int>();
+        int num;
+        bool flag=true;
+        int menu_num;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -51,6 +57,28 @@ namespace ЭВМ
             soundPlayer = new SoundPlayer(soundFilePath);
             ToolsPages.Visibility = Visibility.Hidden;
             MotherBoardImage.Visibility = Visibility.Hidden;
+            while (arr_of_brokes.Count!=8)
+            {
+                flag = true;
+                num = rand.Next(1,9);
+                for (int i = 0; i < arr_of_brokes.Count; i++)
+                {
+                    if (arr_of_brokes[i]== num)
+                    {
+                        flag = false;
+                        break;
+                    }                                                                                
+                }
+                if (flag) { arr_of_brokes.Add(num); }
+            }
+            Trace.WriteLine(arr_of_brokes[0]);
+            Trace.WriteLine(arr_of_brokes[1]);
+            Trace.WriteLine(arr_of_brokes[2]);
+            Trace.WriteLine(arr_of_brokes[3]);
+            Trace.WriteLine(arr_of_brokes[4]);
+            Trace.WriteLine(arr_of_brokes[5]);
+            Trace.WriteLine(arr_of_brokes[6]);
+            Trace.WriteLine(arr_of_brokes[7]);
             int startmargine_left = -253;//генерация квадратиков для тестеров
             int startmargine_top = -363;
             int k = 0;
@@ -103,8 +131,6 @@ namespace ЭВМ
                 startmargine_top += 30;
                 startmargine_left = -253;
             }
-            
-
         }
 
         private void StopGenering(object sender, EventArgs e)
@@ -529,9 +555,9 @@ namespace ЭВМ
         { 
             string Source = (string)((Button)e.OriginalSource).Content;
             string NumberString = Source.Substring(Source.Length-1);//образка названия кнопки, для выделения числа
-            int Number = int.Parse(NumberString);//преобразование в int
-            current_mode = Number;
-            broke = brokes[Number - 1];
+            menu_num = int.Parse(NumberString);//преобразование в int
+            current_mode = rand.Next(1, 9);
+            broke = brokes[current_mode - 1];
             current_page = "Осцилограф";
             AorusB450 = new MotherBoard(current_mode);
             lose.Visibility = Visibility.Hidden;
@@ -821,6 +847,9 @@ namespace ЭВМ
                 if (results.SelectedIndex+1==current_mode)
                 {
                     win.Visibility = Visibility.Visible;
+                    Button item = (Button)Menu.Items[menu_num-1];
+                    item.Content = broke;
+                    item.IsEnabled = false;
                 }
                 else 
                 {
