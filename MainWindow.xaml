@@ -147,6 +147,26 @@
                         <VisualBrush x:Name="MagnifierBrush12"  Visual="{Binding ElementName=V12_1}" ViewboxUnits="Absolute"/>
                     </Ellipse.Fill>
                 </Ellipse>
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle13" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush13"  Visual="{Binding ElementName=MEM1}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle14" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush14"  Visual="{Binding ElementName=MEM2}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle15" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush15"  Visual="{Binding ElementName=MEM3}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle16" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush16"  Visual="{Binding ElementName=MEM4}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
 
             </Canvas>
 
@@ -248,8 +268,12 @@
                         <Rectangle Grid.Row="0" Fill="LightSlateGray" Margin="5,5,5,5"/>
                         <Grid x:Name="memory" Grid.Row="0"></Grid>
 
+                        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="19" Margin="0,-35,0,0">ОЗУ Тестер</TextBlock>
+                        
                         <Rectangle Grid.Row="2" Fill="LightSlateGray" Margin="5,5,5,5"/>
                         <Grid x:Name="pci_e" Grid.Row="2"></Grid>
+
+                        <TextBlock Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="19" Margin="0,-35,0,0">PCI-E Тестер</TextBlock>
 
 
                     </Grid>
@@ -272,6 +296,10 @@
             <Button x:Name="V33_1" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="3.3B" FontSize="5" Foreground="LightGray" Width="17" Height="17" Margin="804,-454,0,0"  />
             <Button x:Name="V5_1" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="5B" FontSize="5" Foreground="LightGray" Width="17" Height="17" Margin="838,-424,0,0"  />
             <Button x:Name="V12_1" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="12B" FontSize="5" Foreground="LightGray" Width="17" Height="17" Margin="805,-424,0,0"  />
+            <Button x:Name="MEM1" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="MEM_Click" Content="MEM1" FontSize="5" Foreground="LightGray" Width="26" Height="440" Margin="482,-425,0,0"  />
+            <Button x:Name="MEM2" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="MEM_Click" Content="MEM2" FontSize="5" Foreground="LightGray" Width="26" Height="440" Margin="551,-425,0,0"  />
+            <Button x:Name="MEM3" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="MEM_Click" Content="MEM3" FontSize="5" Foreground="LightGray" Width="26" Height="440" Margin="612,-425,0,0"  />
+            <Button x:Name="MEM4" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="MEM_Click" Content="MEM4" FontSize="5" Foreground="LightGray" Width="26" Height="440" Margin="682,-425,0,0"  />
 
 
         </Grid>

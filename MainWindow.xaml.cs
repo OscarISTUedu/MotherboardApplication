@@ -46,7 +46,7 @@ namespace ЭВМ
             soundPlayer = new SoundPlayer(soundFilePath);
             ToolsPages.Visibility = Visibility.Hidden;
             MotherBoardImage.Visibility = Visibility.Hidden;
-            int startmargine_left = -253;
+            int startmargine_left = -253;//генерация квадратиков для тестеров
             int startmargine_top = -363;
             int k = 0;
             for (int j = 0; j < 25; j++)
@@ -97,7 +97,7 @@ namespace ЭВМ
                 }
                 startmargine_top += 30;
                 startmargine_left = -253;
-            }
+            }   
         }
 
         private void StopGenering(object sender, EventArgs e)
@@ -161,6 +161,10 @@ namespace ЭВМ
             MagnifierBrush10.Viewbox = viewboxRect;
             MagnifierBrush11.Viewbox = viewboxRect;
             MagnifierBrush12.Viewbox = viewboxRect;
+            MagnifierBrush13.Viewbox = viewboxRect;
+            MagnifierBrush14.Viewbox = viewboxRect;
+            MagnifierBrush15.Viewbox = viewboxRect;
+            MagnifierBrush16.Viewbox = viewboxRect;
 
             MagnifierCircle.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
             MagnifierCircle.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
@@ -200,6 +204,18 @@ namespace ЭВМ
 
             MagnifierCircle12.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
             MagnifierCircle12.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
+
+            MagnifierCircle13.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
+            MagnifierCircle13.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
+
+            MagnifierCircle14.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
+            MagnifierCircle14.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
+
+            MagnifierCircle15.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
+            MagnifierCircle15.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
+
+            MagnifierCircle16.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
+            MagnifierCircle16.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
         }
 
         private void ContentPanel_MouseEnter(object sender, MouseEventArgs e)
@@ -498,7 +514,10 @@ namespace ЭВМ
         {
             mediaElement.Stop(); // Остановка звука по завершении воспроизведения
         }*/
-
+        private void Mem_click(object sender, MouseEventArgs e)
+        {
+             
+        }
 
 
         private void Menu_Click (object sender, RoutedEventArgs e)//меню выбора неисправности
@@ -657,6 +676,34 @@ namespace ЭВМ
             if (ToolsPages.SelectedItem is TabItem selectedTab)
             {
                 current_page = $"{selectedTab.Header}";
+                MEM1.Opacity = 0;
+                MEM2.Opacity = 0;
+                MEM3.Opacity = 0;
+                MEM4.Opacity = 0;
+            }
+        }
+
+        private void MEM_Click(object sender, RoutedEventArgs e)
+        {
+            rand = new Random();
+            int k = 0;
+            int pos = 0;
+            if (current_page == "Другое")
+            {
+                if (current_mode == 7)
+                {
+
+                    k = rand.Next(0, 200);
+                    for (int i = 0; i < k; i++)
+                    {
+                        pos = rand.Next(409);
+                        Rectangle rectangle = (Rectangle)FindName("Rect_memory" + pos);
+                        rectangle.Fill = Brushes.Red;
+                        //"Rect_memory" + k;
+                        //IsKz.Fill = Brushes.Red;
+
+                    }
+                }
             }
         }
     }
