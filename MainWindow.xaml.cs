@@ -51,16 +51,10 @@ namespace ЭВМ
 
         private void StopGenering(object sender, EventArgs e)
         {
-            Trace.WriteLine("len.com");
-            Trace.WriteLine(GetNumOfElem(compare));
-            
             CompositionTarget.Rendering -= update; 
             DownVoltageText.Text = "0,000";
-            //CompositionTarget.Rendering -= update;
             isGenering = false;
             Array.Clear(compare,0 ,compare.Length);
-            //DownVoltageText.Text = "0,000";
-            /*elements.Opacity = 0;*/
             GndButton.Opacity = 0;
             RtcButton.Opacity = 0;
             BIOSButton.Opacity = 0;
@@ -168,7 +162,7 @@ namespace ЭВМ
                 {
                     DownVoltageText.Text = "???";
                 }
-                AorusB450.refresh(1);
+                AorusB450.refresh(current_mode);
             }
         }
 
@@ -438,8 +432,8 @@ namespace ЭВМ
                     case 1://usb сломан
                         usb.Fill("0,9" + rnd.Next(10, 100));
                         break;
-                    case 2:////часы не работают - не работает южный порт
-                           //осцилограма не показывает//график не синусоидальный//Частота не 32768Гц
+                    case 2://bios//график не синусоидальный
+
                         break;
                 }
                 /*Trace.WriteLine("branching:");
@@ -466,8 +460,8 @@ namespace ЭВМ
                     case 1://usb сломан
                         usb.Fill("0,9"+rnd.Next(10,100));
                         break;
-                    case 2:////часы не работают - не работает южный порт
-                           //осцилограма не показывает//график не синусоидальный//Частота не 32768Гц
+                    case 2://bios//график не синусоидальный
+
                         break;
                 }
             }

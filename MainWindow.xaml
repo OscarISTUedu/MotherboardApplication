@@ -65,7 +65,13 @@
 
         <ListBox x:Name="Menu"  Visibility="Hidden" HorizontalAlignment="Center" Height="600" VerticalAlignment="Top" Width="514" Margin="0,40,0,0" HorizontalContentAlignment="Center">
             <Button Background="AntiqueWhite" Content="Неисправность №1" Height="30" Width="484" Click="Menu_Click"/>
-            <Button Background="AntiqueWhite" Content="Неисправность №2" Height="30" Width="484" Click="Menu_Click" IsHitTestVisible="False"/>
+            <Button Background="AntiqueWhite" Content="Неисправность №2" Height="30" Width="484" Click="Menu_Click"/>
+            <Button Background="AntiqueWhite" Content="Неисправность №3" Height="30" Width="484" Click="Menu_Click" />
+            <Button Background="AntiqueWhite" Content="Неисправность №4" Height="30" Width="484" Click="Menu_Click" />
+            <Button Background="AntiqueWhite" Content="Неисправность №5" Height="30" Width="484" Click="Menu_Click" />
+            <Button Background="AntiqueWhite" Content="Неисправность №6" Height="30" Width="484" Click="Menu_Click" />
+            <Button Background="AntiqueWhite" Content="Неисправность №7" Height="30" Width="484" Click="Menu_Click" />
+            <Button Background="AntiqueWhite" Content="Неисправность №8" Height="30" Width="484" Click="Menu_Click" />
         </ListBox>
         <Grid x:Name="PlayGround">
             <Grid.ColumnDefinitions>
