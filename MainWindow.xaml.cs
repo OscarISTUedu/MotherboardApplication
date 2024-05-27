@@ -66,6 +66,7 @@ namespace ЭВМ
             Usb1_3.Opacity = 0;
             Usb1_4.Opacity = 0;
             V33_1.Opacity = 0;
+            V5_1.Opacity = 0;
             Good_synk.Visibility = Visibility.Hidden;   
             Bad_synk.Visibility = Visibility.Hidden;   
             IsKz.Fill = Brushes.LightBlue;
@@ -106,6 +107,7 @@ namespace ЭВМ
             MagnifierBrush8.Viewbox = viewboxRect;
             MagnifierBrush9.Viewbox = viewboxRect;
             MagnifierBrush10.Viewbox = viewboxRect;
+            MagnifierBrush11.Viewbox = viewboxRect;
 
             MagnifierCircle.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
             MagnifierCircle.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
@@ -139,6 +141,9 @@ namespace ЭВМ
 
             MagnifierCircle10.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
             MagnifierCircle10.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
+
+            MagnifierCircle11.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
+            MagnifierCircle11.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
         }
 
         private void ContentPanel_MouseEnter(object sender, MouseEventArgs e)
@@ -227,6 +232,10 @@ namespace ЭВМ
                                 case "3.3B":
                                     compare[0] = AorusB450.line_3_3B;
                                     break;
+                                case "5B":
+                                    compare[0] = AorusB450.line_5B;
+                                    break;
+
 
 
                             }
@@ -288,6 +297,9 @@ namespace ЭВМ
                                 case "3.3B":
                                     compare[1] = AorusB450.line_3_3B;
                                     break;
+                                case "5B":
+                                    compare[1] = AorusB450.line_5B;
+                                    break;
                             }
                             if (GetNumOfElem(compare) == 2)
                             {
@@ -342,6 +354,9 @@ namespace ЭВМ
                                 case "3.3B":
                                     compare[0] = AorusB450.line_3_3B;
                                     break;
+                                case "5B":
+                                    compare[0] = AorusB450.line_5B;
+                                    break;
                             }
                             if (GetNumOfElem(compare) == 2)
                             {
@@ -385,6 +400,9 @@ namespace ЭВМ
                                     break;
                                 case "3.3B":
                                     compare[1] = AorusB450.line_3_3B;
+                                    break;
+                                case "5B":
+                                    compare[1] = AorusB450.line_5B;
                                     break;
                             }
                             if (GetNumOfElem(compare) == 2)
@@ -472,14 +490,17 @@ namespace ЭВМ
                     case 1://usb сломан
                         usb.Fill("0,9" + rnd.Next(10, 100));
                         line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
+                        line_5B.Fill("5,0000" + rnd.Next(1, 10));
                         break;
                     case 2://rtc не работает//график не синусоидальный
                         usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
                         line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
+                        line_5B.Fill("5,0000" + rnd.Next(1, 10));
                         break;
                     case 3://bios//график не синусоидальный
                         usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
                         line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
+                        line_5B.Fill("5,0000" + rnd.Next(1, 10));
                         break;
                     case 4://5V кз
                         usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
@@ -487,6 +508,7 @@ namespace ЭВМ
                         break;
                     case 5://3.3V кз
                         usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
+                        line_5B.Fill("5,0000" + rnd.Next(1, 10));
                         break;
                 }
                 /*Trace.WriteLine("branching:");
@@ -504,9 +526,11 @@ namespace ЭВМ
                 bios= new Elem(false,true);
                 rtc = new Elem(false,false,true);
                 line_3_3B = new Elem();
+                line_5B = new Elem();
 
                 usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
                 line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
+                line_5B.Fill("5,0000" + rnd.Next(1, 10));
                 gnd.Fill("0,000");
                 rtc.Fill("0,000");
                 bios.Fill("0,000");
@@ -522,7 +546,8 @@ namespace ЭВМ
                         
                         break;
                     case 4://5V кз
-
+                        line_5B.isGND = true;
+                        line_5B.Fill("0");
                         break;
                     case 5://3.3V кз
                         line_3_3B.isGND = true;

@@ -137,6 +137,11 @@
                         <VisualBrush x:Name="MagnifierBrush10"  Visual="{Binding ElementName=V33_1}" ViewboxUnits="Absolute"/>
                     </Ellipse.Fill>
                 </Ellipse>
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle11" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush11"  Visual="{Binding ElementName=V5_1}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
 
             </Canvas>
 
@@ -155,8 +160,8 @@
                             <RowDefinition Height="0.1*"></RowDefinition>
                             <RowDefinition Height="0.5*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Image Stretch="None" Grid.Row="0" Grid.ColumnSpan="2" x:Name="Bad_synk" Source="/syn_bad.png" Visibility="Hidden"> </Image>
-                        <Image Stretch="None" Grid.Row="0" Grid.ColumnSpan="2" x:Name="Good_synk" Source="/syn_good.png" Visibility="Hidden"> </Image>
+                        <Image Stretch="None" Grid.Row="0" Grid.ColumnSpan="2" x:Name="Bad_synk" Source="/syn_bad.png" Visibility="Hidden"></Image>
+                        <Image Stretch="None" Grid.Row="0" Grid.ColumnSpan="2" x:Name="Good_synk" Source="/syn_good.png" Visibility="Hidden"></Image>
                         <Rectangle Grid.Column="0" Grid.Row="1" StrokeThickness="2" Margin="10,10,10,10" Grid.ColumnSpan="1">
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="/MultimimeterRedPin.png"/>
@@ -183,7 +188,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="10*"></ColumnDefinition>
                                     <ColumnDefinition Width="10*"/>
-                                    
+
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="0.6*"></RowDefinition>
@@ -241,8 +246,9 @@
             <Button x:Name="Usb1_2" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,987,-111,0"  />
             <Button x:Name="Usb1_3" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,987,-132,0"  />
             <Button x:Name="Usb1_4" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,967,-132,0"  />
-            <Button x:Name="V33_1" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="3.3B" FontSize="5" Foreground="LightGray" Width="17" Height="16" Margin="0,-465,-815,0"  />
-            
+            <Button x:Name="V33_1" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="3.3B" FontSize="5" Foreground="LightGray" Width="17" Height="17" Margin="804,-454,0,0"  />
+            <Button x:Name="V5_1" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="5B" FontSize="5" Foreground="LightGray" Width="17" Height="17" Margin="838,-424,0,0"  />
+
 
         </Grid>
 
