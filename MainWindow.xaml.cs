@@ -471,15 +471,19 @@ namespace ЭВМ
                 {                      //норма от 0.450мВ до 0.7мВ
                     case 1://usb сломан
                         usb.Fill("0,9" + rnd.Next(10, 100));
+                        line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
                         break;
                     case 2://rtc не работает//график не синусоидальный
                         usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
+                        line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
                         break;
                     case 3://bios//график не синусоидальный
                         usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
+                        line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
                         break;
                     case 4://5V кз
                         usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
+                        line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
                         break;
                     case 5://3.3V кз
                         usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
