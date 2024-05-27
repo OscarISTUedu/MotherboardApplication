@@ -218,6 +218,14 @@ namespace ЭВМ
                                     }
                                     else { Good_synk.Visibility = Visibility.Visible; }
                                 }
+                                if ((compare[0].isRTC || compare[1].isRTC) && (compare[0].isGND || compare[1].isGND))//если там есть rtc
+                                {
+                                    if (current_mode == 2)
+                                    {
+                                        Bad_synk.Visibility = Visibility.Visible;
+                                    }
+                                    else { Good_synk.Visibility = Visibility.Visible; }
+                                }
                                 Plus_o.IsHitTestVisible = false;
                                 Minus_o.IsHitTestVisible = false;
                             }
@@ -432,8 +440,11 @@ namespace ЭВМ
                     case 1://usb сломан
                         usb.Fill("0,9" + rnd.Next(10, 100));
                         break;
-                    case 2://bios//график не синусоидальный
-
+                    case 2://rtc не работает//график не синусоидальный
+                        usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
+                        break;
+                    case 3://bios//график не синусоидальный
+                        usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
                         break;
                 }
                 /*Trace.WriteLine("branching:");
@@ -446,10 +457,10 @@ namespace ЭВМ
                 //in,out bios
                 rnd = new Random();
 
-                rtc = new Elem();
                 usb = new Elem();
                 gnd = new Elem(true);
                 bios= new Elem(false,true);
+                rtc = new Elem(false,false,true);
 
                 usb.Fill("0");
                 gnd.Fill("0");
@@ -460,8 +471,11 @@ namespace ЭВМ
                     case 1://usb сломан
                         usb.Fill("0,9"+rnd.Next(10,100));
                         break;
-                    case 2://bios//график не синусоидальный
-
+                    case 2://rtc не работает//график не синусоидальный
+                        usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
+                        break;
+                    case 3://bios//график не синусоидальный
+                        usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
                         break;
                 }
             }
@@ -498,6 +512,7 @@ public class Elem
     {
         public bool isGND=false;
         public bool isBIOS=false;
+        public bool isRTC=false;
         public string V;//напряжение
 
         public Elem(bool GND)
@@ -508,6 +523,10 @@ public class Elem
         public Elem(bool GND, bool bios)
         {
         V = ""; isGND = GND; isBIOS= bios;
+        }
+        public Elem(bool GND, bool bios,bool rtc)
+        {
+        V = ""; isGND = GND; isBIOS = bios; isRTC = rtc;
         }
 
     public Elem()
