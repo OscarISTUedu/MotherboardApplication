@@ -97,7 +97,9 @@ namespace ЭВМ
                 }
                 startmargine_top += 30;
                 startmargine_left = -253;
-            }   
+            }
+            
+
         }
 
         private void StopGenering(object sender, EventArgs e)
@@ -165,6 +167,7 @@ namespace ЭВМ
             MagnifierBrush14.Viewbox = viewboxRect;
             MagnifierBrush15.Viewbox = viewboxRect;
             MagnifierBrush16.Viewbox = viewboxRect;
+            MagnifierBrush17.Viewbox = viewboxRect;
 
             MagnifierCircle.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
             MagnifierCircle.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
@@ -216,6 +219,9 @@ namespace ЭВМ
 
             MagnifierCircle16.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
             MagnifierCircle16.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
+
+            MagnifierCircle17.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
+            MagnifierCircle17.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
         }
 
         private void ContentPanel_MouseEnter(object sender, MouseEventArgs e)
@@ -677,31 +683,46 @@ namespace ЭВМ
             {
                 current_page = $"{selectedTab.Header}";
                 MEM1.Opacity = 0;
+                MEM1.IsEnabled = true;
                 MEM2.Opacity = 0;
+                MEM2.IsEnabled = true;
                 MEM3.Opacity = 0;
+                MEM3.IsEnabled = true;
                 MEM4.Opacity = 0;
+                MEM4.IsEnabled = true;
+                for (int j = 0; j < 407; j++)
+                {
+                    Rectangle rectangle = (Rectangle)FindName("Rect_memory" + j);
+                    rectangle.Fill = Brushes.Black;
+                }
             }
         }
 
         private void MEM_Click(object sender, RoutedEventArgs e)
         {
-            rand = new Random();
-            int k = 0;
-            int pos = 0;
             if (current_page == "Другое")
             {
+                rand = new Random();
+                int k = 0;
+                int pos = 0;
+                Button button = sender as Button;
+                if (button == null) { return; }
+                button.Opacity = 1;
+                button.IsEnabled = false;
+                for (int j=0; j<407;j++)
+                {
+                    Rectangle rectangle = (Rectangle)FindName("Rect_memory" + j);
+                    rectangle.Fill = Brushes.Black;
+                }
                 if (current_mode == 7)
                 {
 
-                    k = rand.Next(0, 200);
+                    k = rand.Next(2, 200);
                     for (int i = 0; i < k; i++)
                     {
                         pos = rand.Next(409);
                         Rectangle rectangle = (Rectangle)FindName("Rect_memory" + pos);
                         rectangle.Fill = Brushes.Red;
-                        //"Rect_memory" + k;
-                        //IsKz.Fill = Brushes.Red;
-
                     }
                 }
             }
