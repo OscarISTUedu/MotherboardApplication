@@ -608,6 +608,18 @@ namespace ЭВМ
                         line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
                         line_5B.Fill("5,0000" + rnd.Next(1, 10));
                         break;
+                    case 7://ОЗУ не работает
+                        usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
+                        line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
+                        line_5B.Fill("5,0000" + rnd.Next(1, 10));
+                        line_12B.Fill("12,0000" + rnd.Next(1, 10));
+                        break;
+                    case 8://pci e тестер
+                        usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
+                        line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
+                        line_5B.Fill("5,0000" + rnd.Next(1, 10));
+                        line_12B.Fill("12,0000" + rnd.Next(1, 10));
+                        break;
                 }
 
 
@@ -639,10 +651,8 @@ namespace ЭВМ
                         usb.Fill("0,9"+rnd.Next(10,100));
                         break;
                     case 2://rtc не работает//график не синусоидальный
-                        
                         break;
                     case 3://bios//график не синусоидальный
-                        
                         break;
                     case 4://5V кз
                         line_5B.isGND = true;
@@ -655,6 +665,10 @@ namespace ЭВМ
                     case 6://12V кз
                         line_12B.isGND = true;
                         line_12B.Fill("0");
+                        break;
+                    case 7://ОЗУ не работает
+                        break;
+                    case 8://pci e тестер
                         break;
 
                 }

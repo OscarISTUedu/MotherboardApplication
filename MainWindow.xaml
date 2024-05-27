@@ -290,6 +290,24 @@
                 </TabItem>
 
                 <TabItem x:Name="Totals"  Header="Выводы">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.02*"></RowDefinition>
+                            <RowDefinition Height="0.013*"></RowDefinition>
+                            <RowDefinition Height="0.02*"></RowDefinition>
+                            <RowDefinition Height="0.06*"></RowDefinition>
+                            <RowDefinition Height="0.1*"></RowDefinition>
+                            <RowDefinition Height="0.05*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock FontSize="16" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" > По результату диагностики:</TextBlock>
+                        <ComboBox Grid.Row="1" Margin="20,0,20,0" />
+                        <Button Grid.Row="2" Margin="5,10,5,10" Content="Подтвердить" FontSize="20" ></Button>
+                        <TextBlock Grid.Row="3" FontSize="27" Foreground="Red" Text="Не верно" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="Visible"></TextBlock>
+                        <TextBlock Grid.Row="3" FontSize="27" Foreground="Green" Text="Верно" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="Hidden"></TextBlock>
+                        <TextBlock Grid.Row="4" FontSize="27" Text="Проблема была в: " HorizontalAlignment="Center" VerticalAlignment="Top" ></TextBlock>
+                        <Button x:Name="exit" Grid.Row="5" Content="Выход" FontSize="32" Margin="30,50,30,50"></Button>
+                    </Grid>
+                    
                 </TabItem>
 
             </TabControl>
