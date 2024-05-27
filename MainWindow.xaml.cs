@@ -51,9 +51,11 @@ namespace ЭВМ
 
         private void StopGenering(object sender, EventArgs e)
         {
-            if (current_page == "Мультиметр") 
-            { CompositionTarget.Rendering -= update; 
-              DownVoltageText.Text = "0,000"; }
+            Trace.WriteLine("len.com");
+            Trace.WriteLine(GetNumOfElem(compare));
+            
+            CompositionTarget.Rendering -= update; 
+            DownVoltageText.Text = "0,000";
             //CompositionTarget.Rendering -= update;
             isGenering = false;
             Array.Clear(compare,0 ,compare.Length);
@@ -106,6 +108,7 @@ namespace ЭВМ
             MagnifierBrush6.Viewbox = viewboxRect;
             MagnifierBrush7.Viewbox = viewboxRect;
             MagnifierBrush8.Viewbox = viewboxRect;
+            MagnifierBrush9.Viewbox = viewboxRect;
             MagnifierCircle.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
             MagnifierCircle.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
 
@@ -132,6 +135,9 @@ namespace ЭВМ
 
             MagnifierCircle8.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
             MagnifierCircle8.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
+
+            MagnifierCircle9.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
+            MagnifierCircle9.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
         }
 
         private void ContentPanel_MouseEnter(object sender, MouseEventArgs e)
@@ -278,7 +284,7 @@ namespace ЭВМ
                     }
                 }
             }  
-            if (current_page== "Мультиметр")
+            if (current_page== "Вольтметр")
             {
                 if ((bool)Minus.IsChecked)//обработка выделения GND. compare[0] - это минус,compare[1] - плюс
                 {
@@ -383,33 +389,13 @@ namespace ЭВМ
             string Source = (string)((Button)e.OriginalSource).Content;
             string NumberString = Source.Substring(Source.Length-1);//образка названия кнопки, для выделения числа
             int Number = int.Parse(NumberString);//преобразование в int
+            current_mode = Number;
             AorusB450 = new MotherBoard(current_mode);
-            switch (Number)
-            {
-                case 1://всё исправно
-                    current_mode = Number;
-                    Menu.Visibility = Visibility.Hidden;
-                    Begin.Visibility = Visibility.Hidden;
-                    About.Visibility = Visibility.Hidden;
-                    MotherBoardImage.Visibility = Visibility.Visible;
-                    ToolsPages.Visibility = Visibility.Visible;
-
-
-                    /*  if (Multimeter.IsSelected)
-                        Trace.WriteLine("1");*/
-                    //else 
-                    //{ 
-                    //   Trace.WriteLine(Multimeter.IsSelected);
-                    //}
-                    break;
-                case 2://часы не работают - не работает южный порт
-                    //осцилограма не показывает//график не синусоидальный//Частота не 32768Гц
-                    Menu.Visibility = Visibility.Hidden;
-                    Begin.Visibility = Visibility.Hidden;
-                    About.Visibility = Visibility.Hidden;
-                    change_playground(true);
-                    break;
-            }
+            Menu.Visibility = Visibility.Hidden;
+            Begin.Visibility = Visibility.Hidden;
+            About.Visibility = Visibility.Hidden;
+            MotherBoardImage.Visibility = Visibility.Visible;
+            ToolsPages.Visibility = Visibility.Visible;
         }
 
 
@@ -443,24 +429,21 @@ namespace ЭВМ
             public Elem usb;
             public Elem line_5B;
             public Elem line_12B;
-            public Elem line_3_3B;
+            public Elem line_3_3B;  
             public Elem bios;
             public void refresh(int branching)
             {
                 switch (branching)
-                {                      //от 0.450мВ до 0.7мВ
-                    case 1://всё исправно
-                        usb.Fill(usb.V.Substring(0,3) + rnd.Next(10, 100));//v,r,a
-                        gnd.Fill("0");
-                        rtc.Fill("0");
-                        /*Trace.WriteLine(usb.R);*/
-                        /*Trace.WriteLine(((float)Convert.ToDouble(usb.V) * Math.Pow(10, -3) / (float)Convert.ToDouble(usb.A)));
-                        Trace.WriteLine(usb.R);*/
+                {                      //норма от 0.450мВ до 0.7мВ
+                    case 1://usb сломан
+                        usb.Fill("0,9" + rnd.Next(10, 100));
                         break;
                     case 2:////часы не работают - не работает южный порт
                            //осцилограма не показывает//график не синусоидальный//Частота не 32768Гц
                         break;
                 }
+                /*Trace.WriteLine("branching:");
+                Trace.WriteLine(branching);*/
 
             }
             public MotherBoard(int branching)
@@ -473,15 +456,15 @@ namespace ЭВМ
                 usb = new Elem();
                 gnd = new Elem(true);
                 bios= new Elem(false,true);
-                switch (branching)
-                {          //от 0.450мВ до 0.7мВ
-                    case 1://всё исправно
-                        usb.Fill("0,"+rnd.Next(4,7)+rnd.Next(10,100));
-                        gnd.Fill("0");
-                        rtc.Fill("0");
-                        usb.Fill("0,"+rnd.Next(4,7)+rnd.Next(10,100));
 
-                        /*rtc.Fill();*/
+                usb.Fill("0");
+                gnd.Fill("0");
+                rtc.Fill("0");
+                bios.Fill("0");
+                switch (branching)
+                {          //норма от 0.450мВ до 0.7мВ
+                    case 1://usb сломан
+                        usb.Fill("0,9"+rnd.Next(10,100));
                         break;
                     case 2:////часы не работают - не работает южный порт
                            //осцилограма не показывает//график не синусоидальный//Частота не 32768Гц
@@ -509,7 +492,6 @@ namespace ЭВМ
             if (ToolsPages.SelectedItem is TabItem selectedTab)
             {
                 current_page = $"{selectedTab.Header}";
-                Trace.WriteLine(current_page);
             }
         }
     }

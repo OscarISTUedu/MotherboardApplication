@@ -121,6 +121,11 @@
                         <VisualBrush x:Name="MagnifierBrush8"  Visual="{Binding ElementName=Usb1_4}" ViewboxUnits="Absolute"/>
                     </Ellipse.Fill>
                 </Ellipse>
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle9" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush9"  Visual="{Binding ElementName=BIOSButton}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
 
             </Canvas>
 
