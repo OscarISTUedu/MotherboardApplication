@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Media;
 using System.Printing;
+using System.Printing.Interop;
 using System.Security.AccessControl;
 using System.Text;
 using System.Windows;
@@ -36,6 +37,7 @@ namespace ЭВМ
         bool isGenering = false;
         private SoundPlayer soundPlayer;
         string current_page = "Осцилограф";
+        int current_mode = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -59,12 +61,15 @@ namespace ЭВМ
             /*elements.Opacity = 0;*/
             GndButton.Opacity = 0;
             RtcButton.Opacity = 0;
+            BIOSButton.Opacity = 0;
             GndUsb1_1.Opacity = 0;
             GndUsb1_2.Opacity = 0;
             Usb1_1.Opacity = 0;
             Usb1_2.Opacity = 0;
             Usb1_3.Opacity = 0;
             Usb1_4.Opacity = 0;
+            Good_synk.Visibility = Visibility.Hidden;   
+            Bad_synk.Visibility = Visibility.Hidden;   
             IsKz.Fill = Brushes.LightBlue;
             Plus.IsHitTestVisible = true;
             Minus.IsHitTestVisible = true;
@@ -205,7 +210,14 @@ namespace ЭВМ
                             if (GetNumOfElem(compare) == 2)
                             {
                                 //логика осцилографа
-
+                                if ((compare[0].isBIOS || compare[1].isBIOS)&&(compare[0].isGND || compare[1].isGND))//если там есть биос
+                                {
+                                    if (current_mode==3)
+                                    {
+                                        Bad_synk.Visibility = Visibility.Visible;
+                                    }
+                                    else { Good_synk.Visibility = Visibility.Visible; }
+                                }
                                 Plus_o.IsHitTestVisible = false;
                                 Minus_o.IsHitTestVisible = false;
                             }
@@ -246,6 +258,14 @@ namespace ЭВМ
                             if (GetNumOfElem(compare) == 2)
                             {
                                 //логика осцилографа
+                                if ((compare[0].isBIOS || compare[1].isBIOS) && (compare[0].isGND || compare[1].isGND))//если там есть биос
+                                {
+                                    if (current_mode == 3)
+                                    {
+                                        Bad_synk.Visibility = Visibility.Visible;
+                                    }
+                                    else { Good_synk.Visibility = Visibility.Visible; }
+                                }
                                 Plus_o.IsHitTestVisible = false;
                                 Minus_o.IsHitTestVisible = false;
                             }
@@ -344,6 +364,10 @@ namespace ЭВМ
                 }
 
             }
+            else {
+                Trace.WriteLine("----------");
+                Trace.WriteLine(current_page);
+            }
             
         }
 
@@ -353,49 +377,22 @@ namespace ЭВМ
         }*/
 
 
-        public void Tab_Click(object sender, RoutedEventArgs e)
-        {
-            string Source = "";
-            try 
-            {
-            Source = (string)((TextBlock)e.OriginalSource).Text;
-            }
-            catch (Exception ex)
-            {
-                return;
-            }
-            if (Source == "Мультиметр")
-            {
-                current_page = "Мультиметр";
-            }
-            else if (Source == "Осцилограф")
-            {
-                current_page = "Осцилограф";
-            }
-            else if (Source == "Выводы")
-            {
-                current_page = "Выводы";
-            }
-
-            Trace.WriteLine(Source);
-
-            }
-
 
         private void Menu_Click (object sender, RoutedEventArgs e)//меню выбора неисправности
         { 
             string Source = (string)((Button)e.OriginalSource).Content;
             string NumberString = Source.Substring(Source.Length-1);//образка названия кнопки, для выделения числа
             int Number = int.Parse(NumberString);//преобразование в int
+            AorusB450 = new MotherBoard(current_mode);
             switch (Number)
             {
                 case 1://всё исправно
+                    current_mode = Number;
                     Menu.Visibility = Visibility.Hidden;
                     Begin.Visibility = Visibility.Hidden;
                     About.Visibility = Visibility.Hidden;
                     MotherBoardImage.Visibility = Visibility.Visible;
                     ToolsPages.Visibility = Visibility.Visible;
-                    AorusB450 = new MotherBoard(1);
 
 
                     /*  if (Multimeter.IsSelected)
@@ -410,8 +407,7 @@ namespace ЭВМ
                     Menu.Visibility = Visibility.Hidden;
                     Begin.Visibility = Visibility.Hidden;
                     About.Visibility = Visibility.Hidden;
-                    MotherBoardImage.Visibility = Visibility.Visible;
-                    ToolsPages.Visibility = Visibility.Visible;
+                    change_playground(true);
                     break;
             }
         }
@@ -421,16 +417,23 @@ namespace ЭВМ
         private void Plus_Click(object sender, RoutedEventArgs e)
         {
             Minus.IsChecked = false;
-            Minus_o.IsChecked = false;
         }
 
         private void Minus_Click(object sender, RoutedEventArgs e)
         {
            Plus.IsChecked = false;
-           Plus_o.IsChecked = false;
         }
 
+        private void Plus_o_Click(object sender, RoutedEventArgs e)
+        {
+            Minus_o.IsChecked = false;
 
+        }
+
+        private void Minus_o_Click(object sender, RoutedEventArgs e)
+        {
+            Plus_o.IsChecked = false;
+        }
         public class MotherBoard
         {
             public int W;//мощность блока питания
@@ -469,7 +472,7 @@ namespace ЭВМ
                 rtc = new Elem();
                 usb = new Elem();
                 gnd = new Elem(true);
-                bios= new Elem();
+                bios= new Elem(false,true);
                 switch (branching)
                 {          //от 0.450мВ до 0.7мВ
                     case 1://всё исправно
@@ -488,16 +491,29 @@ namespace ЭВМ
 
         }
 
-        private void RtcButton_Click(object sender, RoutedEventArgs e)
+        public void change_playground (bool isVisible)
         {
-
+            if (isVisible) 
+            {
+                MotherBoardImage.Visibility = Visibility.Visible;
+                ToolsPages.Visibility = Visibility.Visible;
+            }
+            else {
+                MotherBoardImage.Visibility = Visibility.Hidden;
+                ToolsPages.Visibility = Visibility.Hidden;
+            }
         }
 
-        private void MotherBoardImage_MouseMove(object sender, MouseEventArgs e)
+        private void ToolsPages_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (ToolsPages.SelectedItem is TabItem selectedTab)
+            {
+                current_page = $"{selectedTab.Header}";
+                Trace.WriteLine(current_page);
+            }
         }
     }
+
 
 
 }
@@ -505,6 +521,7 @@ namespace ЭВМ
 public class Elem
     {
         public bool isGND=false;
+        public bool isBIOS=false;
         public string V;//напряжение
 
         public Elem(bool GND)
@@ -512,7 +529,12 @@ public class Elem
         V = ""; isGND = GND;
         }
 
-        public Elem()
+        public Elem(bool GND, bool bios)
+        {
+        V = ""; isGND = GND; isBIOS= bios;
+        }
+
+    public Elem()
         {
             V = "";
         }
@@ -522,6 +544,7 @@ public class Elem
         }
     }
 
+    
 
     public static class Tools //класс для метода инициализации
     {
