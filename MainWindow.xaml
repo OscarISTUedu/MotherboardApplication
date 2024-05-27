@@ -172,6 +172,11 @@
                         <VisualBrush x:Name="MagnifierBrush17"  Visual="{Binding ElementName=PCI_E1}" ViewboxUnits="Absolute"/>
                     </Ellipse.Fill>
                 </Ellipse>
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle18" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush18"  Visual="{Binding ElementName=PCI_E2}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
 
             </Canvas>
 
@@ -305,7 +310,8 @@
             <Button x:Name="MEM2" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="MEM_Click" Content="MEM2" FontSize="5" Foreground="LightGray" Width="26" Height="440" Margin="551,-425,0,0"  />
             <Button x:Name="MEM3" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="MEM_Click" Content="MEM3" FontSize="5" Foreground="LightGray" Width="26" Height="440" Margin="612,-425,0,0"  />
             <Button x:Name="MEM4" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="MEM_Click" Content="MEM4" FontSize="5" Foreground="LightGray" Width="26" Height="440" Margin="682,-425,0,0"  />
-            <Button x:Name="PCI_E1" Style="{StaticResource  MyButtonStyle}" Opacity="0.5" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="MEM_Click" Content="PCI_E1" FontSize="14" Foreground="LightGray" Width="332" Height="25" Margin="-192,217,0,0"  />
+            <Button x:Name="PCI_E1" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="PCI_E1_Click" Content="PCI_E1" FontSize="14" Foreground="LightGray" Width="332" Height="25" Margin="-192,217,0,0"  />
+            <Button x:Name="PCI_E2" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="PCI_E1_Click" Content="PCI_E2" FontSize="14" Foreground="LightGray" Width="332" Height="25" Margin="-192,611,0,0"  />
 
 
         </Grid>

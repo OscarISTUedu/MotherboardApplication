@@ -168,6 +168,7 @@ namespace ЭВМ
             MagnifierBrush15.Viewbox = viewboxRect;
             MagnifierBrush16.Viewbox = viewboxRect;
             MagnifierBrush17.Viewbox = viewboxRect;
+            MagnifierBrush18.Viewbox = viewboxRect;
 
             MagnifierCircle.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
             MagnifierCircle.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
@@ -222,6 +223,9 @@ namespace ЭВМ
 
             MagnifierCircle17.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
             MagnifierCircle17.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
+
+            MagnifierCircle18.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
+            MagnifierCircle18.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
         }
 
         private void ContentPanel_MouseEnter(object sender, MouseEventArgs e)
@@ -256,7 +260,6 @@ namespace ЭВМ
 
                     if (((float)Convert.ToDouble(compare[0].V)>0)||((float)Convert.ToDouble(compare[1].V)>0))//если измеряем в вольтах
                     {
-                        //volt_text.Text= "Падение напряжение(мВ)";//было
                         volt_text.Text= "Падение напряжение(В)";//стало
                     }
                 }
@@ -520,11 +523,6 @@ namespace ЭВМ
         {
             mediaElement.Stop(); // Остановка звука по завершении воспроизведения
         }*/
-        private void Mem_click(object sender, MouseEventArgs e)
-        {
-             
-        }
-
 
         private void Menu_Click (object sender, RoutedEventArgs e)//меню выбора неисправности
         { 
@@ -692,9 +690,12 @@ namespace ЭВМ
                 MEM4.IsEnabled = true;
                 for (int j = 0; j < 407; j++)
                 {
-                    Rectangle rectangle = (Rectangle)FindName("Rect_memory" + j);
-                    rectangle.Fill = Brushes.Black;
+                    Rectangle Rect_memory = (Rectangle)FindName("Rect_memory" + j);
+                    Rectangle Rect_pci = (Rectangle)FindName("Rect_pci" + j);
+                    Rect_memory.Fill = Brushes.Black;
+                    Rect_pci.Fill = Brushes.Black;
                 }
+
             }
         }
 
@@ -722,6 +723,36 @@ namespace ЭВМ
                     {
                         pos = rand.Next(409);
                         Rectangle rectangle = (Rectangle)FindName("Rect_memory" + pos);
+                        rectangle.Fill = Brushes.Red;
+                    }
+                }
+            }
+        }
+
+        private void PCI_E1_Click(object sender, RoutedEventArgs e)
+        {
+            if (current_page == "Другое")
+            {
+                rand = new Random();
+                int k = 0;
+                int pos = 0;
+                Button button = sender as Button;
+                if (button == null) { return; }
+                button.Opacity = 1;
+                button.IsEnabled = false;
+                for (int j = 0; j < 407; j++)
+                {
+                    Rectangle rectangle = (Rectangle)FindName("Rect_pci" + j);
+                    rectangle.Fill = Brushes.Black;
+                }
+                if (current_mode == 8)
+                {
+
+                    k = rand.Next(2, 200);
+                    for (int i = 0; i < k; i++)
+                    {
+                        pos = rand.Next(409);
+                        Rectangle rectangle = (Rectangle)FindName("Rect_pci" + pos);
                         rectangle.Fill = Brushes.Red;
                     }
                 }
