@@ -6,12 +6,14 @@ using System.Diagnostics;
 using System.Media;
 using System.Printing;
 using System.Printing.Interop;
+using System.Reflection;
 using System.Security.AccessControl;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -38,6 +40,9 @@ namespace ЭВМ
         private SoundPlayer soundPlayer;
         string current_page = "Осцилограф";
         int current_mode = 0;
+        string[] brokes = { "Не исправен южный мост", "Неисправность RTC", "Неисправность микросхемы BIOS", "Короткое замыкание на линии 5V",
+        "Короткое замыкание на линии 3.3V","Короткое замыкание на линии 12V","Неисправность слотов ОЗУ","Неисправность слотов PCI-E"};
+        string broke;
         public MainWindow()
         {
             InitializeComponent();
@@ -512,11 +517,6 @@ namespace ЭВМ
                 }
 
             }
-            else {
-                Trace.WriteLine("----------");
-                Trace.WriteLine(current_page);
-            }
-            
         }
 
         /*private void MediaElement_MediaEnded(object sender, RoutedEventArgs e)
@@ -530,6 +530,7 @@ namespace ЭВМ
             string NumberString = Source.Substring(Source.Length-1);//образка названия кнопки, для выделения числа
             int Number = int.Parse(NumberString);//преобразование в int
             current_mode = Number;
+            broke = brokes[Number - 1];
             AorusB450 = new MotherBoard(current_mode);
             Menu.Visibility = Visibility.Hidden;
             Begin.Visibility = Visibility.Hidden;
@@ -771,6 +772,45 @@ namespace ЭВМ
                     }
                 }
             }
+        }
+
+        private void Button_confirm(object sender, RoutedEventArgs e)
+        {
+            if (results.SelectedIndex!=-1)
+            {
+                if (results.SelectedIndex+1==current_mode)
+                {
+                    win.Visibility = Visibility.Visible;
+                }
+                else 
+                {
+                    lose.Visibility= Visibility.Visible;
+                    answer.Text += broke;
+                    answer.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private void exit_Click(object sender, RoutedEventArgs e)
+        {
+            change_playground(false);
+            GndButton.Opacity = 0;
+            RtcButton.Opacity = 0;
+            BIOSButton.Opacity = 0;
+            GndUsb1_1.Opacity = 0;
+            GndUsb1_2.Opacity = 0;
+            Usb1_1.Opacity = 0;
+            Usb1_2.Opacity = 0;
+            Usb1_3.Opacity = 0;
+            Usb1_4.Opacity = 0;
+            V33_1.Opacity = 0;
+            V5_1.Opacity = 0;
+            V12_1.Opacity = 0;
+            MagnifierPanel.Visibility = Visibility.Hidden;
+            Good_synk.Visibility = Visibility.Hidden;
+            Bad_synk.Visibility = Visibility.Hidden;
+            Begin.Visibility = Visibility.Visible;
+            About.Visibility = Visibility.Visible;
         }
     }
 

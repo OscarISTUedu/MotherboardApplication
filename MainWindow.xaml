@@ -177,7 +177,6 @@
                         <VisualBrush x:Name="MagnifierBrush18"  Visual="{Binding ElementName=PCI_E2}" ViewboxUnits="Absolute"/>
                     </Ellipse.Fill>
                 </Ellipse>
-
             </Canvas>
 
 
@@ -300,12 +299,21 @@
                             <RowDefinition Height="0.05*"></RowDefinition>
                         </Grid.RowDefinitions>
                         <TextBlock FontSize="16" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" > По результату диагностики:</TextBlock>
-                        <ComboBox Grid.Row="1" Margin="20,0,20,0" />
-                        <Button Grid.Row="2" Margin="5,10,5,10" Content="Подтвердить" FontSize="20" ></Button>
-                        <TextBlock Grid.Row="3" FontSize="27" Foreground="Red" Text="Не верно" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="Visible"></TextBlock>
-                        <TextBlock Grid.Row="3" FontSize="27" Foreground="Green" Text="Верно" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="Hidden"></TextBlock>
-                        <TextBlock Grid.Row="4" FontSize="27" Text="Проблема была в: " HorizontalAlignment="Center" VerticalAlignment="Top" ></TextBlock>
-                        <Button x:Name="exit" Grid.Row="5" Content="Выход" FontSize="32" Margin="30,50,30,50"></Button>
+                        <ComboBox x:Name="results" Grid.Row="1" Margin="20,0,20,0">
+                        <TextBlock>Не исправен южный мост</TextBlock>
+                        <TextBlock>Неисправность RTC</TextBlock>
+                        <TextBlock>Неисправность микросхемы BIOS</TextBlock>
+                        <TextBlock>Короткое замыкание на линии 5V</TextBlock>
+                        <TextBlock>Короткое замыкание на линии 3.3V</TextBlock>
+                        <TextBlock>Короткое замыкание на линии 12V</TextBlock>
+                        <TextBlock>Неисправность слотов ОЗУ</TextBlock>
+                        <TextBlock>Неисправность слотов PCI-E</TextBlock>
+                        </ComboBox>
+                        <Button Grid.Row="2" Margin="5,10,5,10" Content="Подтвердить" FontSize="20" Click="Button_confirm"></Button>
+                        <TextBlock Grid.Row="3" x:Name="lose" FontSize="27" Foreground="Red" Text="Не верно" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="Hidden"></TextBlock>
+                        <TextBlock Grid.Row="3" x:Name="win" FontSize="27" Foreground="Green" Text="Верно" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="Hidden"></TextBlock>
+                        <TextBlock Grid.Row="4" x:Name="answer" TextWrapping="Wrap" FontSize="27" Text="Текущая неисправность: " HorizontalAlignment="Center" VerticalAlignment="Center"  Visibility="Hidden"></TextBlock>
+                        <Button x:Name="exit" Grid.Row="5" Content="Выход" Click="exit_Click" FontSize="32" Margin="30,50,30,50"></Button>
                     </Grid>
                     
                 </TabItem>
