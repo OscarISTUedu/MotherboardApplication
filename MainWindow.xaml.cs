@@ -565,7 +565,6 @@ namespace ЭВМ
             answer.Visibility = Visibility.Hidden;
             Menu.Visibility = Visibility.Hidden;
             Begin.Visibility = Visibility.Hidden;
-            About.Visibility = Visibility.Hidden;
             MotherBoardImage.Visibility = Visibility.Visible;
             ToolsPages.Visibility = Visibility.Visible;
         }
@@ -885,7 +884,6 @@ namespace ЭВМ
             Zoomer.Background = Brushes.LightGray;
             Zoomer_o.Background = Brushes.LightGray;
             Begin.Visibility = Visibility.Visible;
-            About.Visibility = Visibility.Visible;
             ToolsPages.SelectedIndex= 0;
             win.Visibility = Visibility.Hidden;
         }

@@ -61,7 +61,6 @@
 
     <Grid x:Name="MainRoot" Background="White">
         <Button x:Name="Begin"  Content="Начать" HorizontalAlignment="Center" Height="85" VerticalAlignment="Top" Width="300" Click="Button_Click" Margin="0,179,0,0" FontSize="36"/>
-        <Button x:Name="About"  Content="О приложении" HorizontalAlignment="Center" Height="85" Margin="0,295,0,0" VerticalAlignment="Top" Width="300"  Click="Button_Click" FontSize="36"/>
 
         <ListBox x:Name="Menu"  Visibility="Hidden" HorizontalAlignment="Center" Height="600" VerticalAlignment="Top" Width="514" Margin="0,40,0,0" HorizontalContentAlignment="Center">
             <Button Background="AntiqueWhite" Content="Неисправность №1" Height="30" Width="484" Click="Menu_Click"/>
