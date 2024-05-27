@@ -142,6 +142,11 @@
                         <VisualBrush x:Name="MagnifierBrush11"  Visual="{Binding ElementName=V5_1}" ViewboxUnits="Absolute"/>
                     </Ellipse.Fill>
                 </Ellipse>
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle12" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush12"  Visual="{Binding ElementName=V12_1}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
 
             </Canvas>
 
@@ -188,7 +193,6 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="10*"></ColumnDefinition>
                                     <ColumnDefinition Width="10*"/>
-
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="0.6*"></RowDefinition>
@@ -232,9 +236,28 @@
                     </TabItem.Content>
                 </TabItem>
 
+                <TabItem x:Name="Other" Header="Другое">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.6*"></RowDefinition>
+                            <RowDefinition Height="0.1*"></RowDefinition>
+                            <RowDefinition Height="0.6*"></RowDefinition>
+                            <RowDefinition Height="0.1*"></RowDefinition>
+                            <RowDefinition Height="0.1*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Rectangle Grid.Row="0" Fill="LightSlateGray" Margin="5,5,5,5"/>
+                        <Grid x:Name="memory" Grid.Row="0"></Grid>
+
+                        <Rectangle Grid.Row="2" Fill="LightSlateGray" Margin="5,5,5,5"/>
+                        <Grid x:Name="pci_e" Grid.Row="2"></Grid>
+
+
+                    </Grid>
+                </TabItem>
 
                 <TabItem x:Name="Totals"  Header="Выводы">
                 </TabItem>
+
             </TabControl>
             <Button x:Name="GndButton" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black"  Click="Anyclick" Content="GND" FontSize="22" Foreground="LightGray" Width="88" Height="528" Margin="0,-488,782,0"></Button>
             <Button x:Name="RtcButton" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black"  Click="Anyclick" Content="RTC" FontSize="20" Foreground="LightGray" Width="70" Height="60" Margin="-285,-118,0,0" />
@@ -248,6 +271,7 @@
             <Button x:Name="Usb1_4" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,967,-132,0"  />
             <Button x:Name="V33_1" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="3.3B" FontSize="5" Foreground="LightGray" Width="17" Height="17" Margin="804,-454,0,0"  />
             <Button x:Name="V5_1" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="5B" FontSize="5" Foreground="LightGray" Width="17" Height="17" Margin="838,-424,0,0"  />
+            <Button x:Name="V12_1" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="12B" FontSize="5" Foreground="LightGray" Width="17" Height="17" Margin="805,-424,0,0"  />
 
 
         </Grid>

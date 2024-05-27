@@ -46,7 +46,58 @@ namespace ЭВМ
             soundPlayer = new SoundPlayer(soundFilePath);
             ToolsPages.Visibility = Visibility.Hidden;
             MotherBoardImage.Visibility = Visibility.Hidden;
-            // Инициализируем SoundPlayer с путем к аудиофайлу
+            int startmargine_left = -253;
+            int startmargine_top = -363;
+            int k = 0;
+            for (int j = 0; j < 25; j++)
+            {
+                for (int i = 0; i < 18; i++)
+                {
+                    Rectangle myRectangle = new Rectangle
+                    {
+                        Width = 10,
+                        Height = 10,
+                        Stroke = Brushes.Black,
+                        Fill = Brushes.Black,
+                        StrokeThickness = 2
+                    };
+                    myRectangle.Margin = new Thickness(startmargine_left, startmargine_top, 0, 0);
+                    string rectName = "Rect_memory" + k;
+                    myRectangle.Name = rectName;
+                    memory.RegisterName(rectName, myRectangle);
+                    memory.Children.Add(myRectangle);
+                    startmargine_left += 30;
+                    k++;
+                }
+                startmargine_top += 30;
+                startmargine_left = -253;
+            }
+            startmargine_left = -253;
+            startmargine_top = -363;
+            k = 0;
+            for (int j = 0; j < 25; j++)
+            {
+                for (int i = 0; i < 18; i++)
+                {
+                    Rectangle myRectangle = new Rectangle
+                    {
+                        Width = 10,
+                        Height = 10,
+                        Stroke = Brushes.Black,
+                        Fill = Brushes.Black,
+                        StrokeThickness = 2
+                    };
+                    myRectangle.Margin = new Thickness(startmargine_left, startmargine_top, 0, 0);
+                    string rectName = "Rect_pci" + k;
+                    myRectangle.Name = rectName;
+                    pci_e.RegisterName(rectName, myRectangle);
+                    pci_e.Children.Add(myRectangle);
+                    startmargine_left += 30;
+                    k++;
+                }
+                startmargine_top += 30;
+                startmargine_left = -253;
+            }
         }
 
         private void StopGenering(object sender, EventArgs e)
@@ -67,6 +118,7 @@ namespace ЭВМ
             Usb1_4.Opacity = 0;
             V33_1.Opacity = 0;
             V5_1.Opacity = 0;
+            V12_1.Opacity = 0;  
             Good_synk.Visibility = Visibility.Hidden;   
             Bad_synk.Visibility = Visibility.Hidden;   
             IsKz.Fill = Brushes.LightBlue;
@@ -108,6 +160,7 @@ namespace ЭВМ
             MagnifierBrush9.Viewbox = viewboxRect;
             MagnifierBrush10.Viewbox = viewboxRect;
             MagnifierBrush11.Viewbox = viewboxRect;
+            MagnifierBrush12.Viewbox = viewboxRect;
 
             MagnifierCircle.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
             MagnifierCircle.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
@@ -144,6 +197,9 @@ namespace ЭВМ
 
             MagnifierCircle11.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
             MagnifierCircle11.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
+
+            MagnifierCircle12.SetValue(Canvas.LeftProperty, center.X - MagnifierCircle.ActualWidth / 2);
+            MagnifierCircle12.SetValue(Canvas.TopProperty, center.Y - MagnifierCircle.ActualHeight / 2);
         }
 
         private void ContentPanel_MouseEnter(object sender, MouseEventArgs e)
@@ -235,9 +291,9 @@ namespace ЭВМ
                                 case "5B":
                                     compare[0] = AorusB450.line_5B;
                                     break;
-
-
-
+                                case "12B":
+                                    compare[0] = AorusB450.line_12B;
+                                    break;
                             }
                             if (GetNumOfElem(compare) == 2)
                             {
@@ -300,6 +356,9 @@ namespace ЭВМ
                                 case "5B":
                                     compare[1] = AorusB450.line_5B;
                                     break;
+                                case "12B":
+                                    compare[1] = AorusB450.line_12B;
+                                    break;
                             }
                             if (GetNumOfElem(compare) == 2)
                             {
@@ -357,6 +416,9 @@ namespace ЭВМ
                                 case "5B":
                                     compare[0] = AorusB450.line_5B;
                                     break;
+                                case "12B":
+                                    compare[0] = AorusB450.line_12B;
+                                    break;
                             }
                             if (GetNumOfElem(compare) == 2)
                             {
@@ -403,6 +465,9 @@ namespace ЭВМ
                                     break;
                                 case "5B":
                                     compare[1] = AorusB450.line_5B;
+                                    break;
+                                case "12B":
+                                    compare[1] = AorusB450.line_12B;
                                     break;
                             }
                             if (GetNumOfElem(compare) == 2)
@@ -491,28 +556,37 @@ namespace ЭВМ
                         usb.Fill("0,9" + rnd.Next(10, 100));
                         line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
                         line_5B.Fill("5,0000" + rnd.Next(1, 10));
+                        line_12B.Fill("12,0000" + rnd.Next(1, 10));
                         break;
                     case 2://rtc не работает//график не синусоидальный
                         usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
                         line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
                         line_5B.Fill("5,0000" + rnd.Next(1, 10));
+                        line_12B.Fill("12,0000" + rnd.Next(1, 10));
                         break;
                     case 3://bios//график не синусоидальный
                         usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
                         line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
                         line_5B.Fill("5,0000" + rnd.Next(1, 10));
+                        line_12B.Fill("12,0000" + rnd.Next(1, 10));
                         break;
                     case 4://5V кз
                         usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
                         line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
+                        line_12B.Fill("12,0000" + rnd.Next(1, 10));
                         break;
                     case 5://3.3V кз
                         usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
                         line_5B.Fill("5,0000" + rnd.Next(1, 10));
+                        line_12B.Fill("12,0000" + rnd.Next(1, 10));
+                        break;
+                    case 6://12V кз
+                        usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
+                        line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
+                        line_5B.Fill("5,0000" + rnd.Next(1, 10));
                         break;
                 }
-                /*Trace.WriteLine("branching:");
-                Trace.WriteLine(branching);*/
+
 
             }
             public MotherBoard(int branching)
@@ -525,10 +599,12 @@ namespace ЭВМ
                 gnd = new Elem(true);
                 bios= new Elem(false,true);
                 rtc = new Elem(false,false,true);
+                line_12B = new Elem();
                 line_3_3B = new Elem();
                 line_5B = new Elem();
 
                 usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
+                line_12B.Fill("12,0000" + rnd.Next(1, 10));
                 line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
                 line_5B.Fill("5,0000" + rnd.Next(1, 10));
                 gnd.Fill("0,000");
@@ -552,6 +628,10 @@ namespace ЭВМ
                     case 5://3.3V кз
                         line_3_3B.isGND = true;
                         line_3_3B.Fill("0");
+                        break;
+                    case 6://12V кз
+                        line_12B.isGND = true;
+                        line_12B.Fill("0");
                         break;
 
                 }
