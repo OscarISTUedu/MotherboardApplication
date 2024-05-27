@@ -132,6 +132,11 @@
                         <VisualBrush x:Name="MagnifierBrush9"  Visual="{Binding ElementName=BIOSButton}" ViewboxUnits="Absolute"/>
                     </Ellipse.Fill>
                 </Ellipse>
+                <Ellipse Stroke="LightBlue" Name="MagnifierCircle10" Height="100" Width="100"  >
+                    <Ellipse.Fill>
+                        <VisualBrush x:Name="MagnifierBrush10"  Visual="{Binding ElementName=V33_1}" ViewboxUnits="Absolute"/>
+                    </Ellipse.Fill>
+                </Ellipse>
 
             </Canvas>
 
@@ -199,7 +204,7 @@
                                         <TextBlock x:Name="DownVoltageText" Opacity="0.6" Foreground="Red" FontSize="39" Text="0,000"  FontFamily="DSEG7 Classic Mini" ></TextBlock>
                                     </StackPanel>
                                 </Grid>
-                                <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" >Падение напряжение(мВ)</TextBox>
+                                <TextBox x:Name="volt_text" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalContentAlignment="Center" FontSize="16" BorderThickness="0,0,0,0" >Падение напряжение(мВ)</TextBox>
                                 <Grid x:Name="NumbersAmpers" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="112,0,0,0"/>
                                 <Grid x:Name="KZ" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="102,0,0,0">
                                     <Ellipse x:Name="IsKz" Width="20" Height="20" Fill="LightBlue" Stroke="Black" ></Ellipse>
@@ -237,8 +242,8 @@
             <Button x:Name="Usb1_2" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,987,-111,0"  />
             <Button x:Name="Usb1_3" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,987,-132,0"  />
             <Button x:Name="Usb1_4" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="USB" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,967,-132,0"  />
-            <Button x:Name="Usb1_5B_1" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="5B" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,967,-151,0"  />
-            <Button x:Name="Usb1_5B_2" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="5B" FontSize="5" Foreground="LightGray" Width="9" Height="10" Margin="0,987,-151,0"  />
+            <Button x:Name="V33_1" Style="{StaticResource  MyButtonStyle}" Opacity="0" MouseMove="ContentPanel_MouseMove" MouseEnter="ContentPanel_MouseEnter" Background="Black" Click="Anyclick" Content="3.3B" FontSize="5" Foreground="LightGray" Width="17" Height="16" Margin="0,-465,-815,0"  />
+            
 
         </Grid>
 
