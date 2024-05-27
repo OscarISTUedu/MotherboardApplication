@@ -253,6 +253,7 @@ namespace ЭВМ
             if ((AorusB450 != null) &&(rand.Next(0,100)>95)) //compare[0] - это минус,compare[1] - плюс.От плюса отнимаем минус compare[1]-compare[0]
             {
                 isGenering = true;
+                if (compare[0] == null|| compare[1] == null) { return; }
                 if (compare[0].isGND || compare[1].isGND) //если мерим м/у gnd и элементом
                 {
                     volt_text.Text = "Падение напряжение(мВ)";//было
@@ -531,7 +532,11 @@ namespace ЭВМ
             int Number = int.Parse(NumberString);//преобразование в int
             current_mode = Number;
             broke = brokes[Number - 1];
+            current_page = "Осцилограф";
             AorusB450 = new MotherBoard(current_mode);
+            lose.Visibility = Visibility.Hidden;
+            answer.Text = answer.Text.Substring(0,23);
+            answer.Visibility = Visibility.Hidden;
             Menu.Visibility = Visibility.Hidden;
             Begin.Visibility = Visibility.Hidden;
             About.Visibility = Visibility.Hidden;
@@ -583,40 +588,40 @@ namespace ЭВМ
                         line_12B.Fill("12,0000" + rnd.Next(1, 10));
                         break;
                     case 2://rtc не работает//график не синусоидальный
-                        usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
+                        usb.Fill(usb.V.Substring(0, 3) + rnd.Next(10, 100));
                         line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
                         line_5B.Fill("5,0000" + rnd.Next(1, 10));
                         line_12B.Fill("12,0000" + rnd.Next(1, 10));
                         break;
                     case 3://bios//график не синусоидальный
-                        usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
+                        usb.Fill(usb.V.Substring(0, 3) + rnd.Next(10, 100));
                         line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
                         line_5B.Fill("5,0000" + rnd.Next(1, 10));
                         line_12B.Fill("12,0000" + rnd.Next(1, 10));
                         break;
                     case 4://5V кз
-                        usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
+                        usb.Fill(usb.V.Substring(0, 3) + rnd.Next(10, 100));
                         line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
                         line_12B.Fill("12,0000" + rnd.Next(1, 10));
                         break;
                     case 5://3.3V кз
-                        usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
+                        usb.Fill(usb.V.Substring(0, 3) + rnd.Next(10, 100));
                         line_5B.Fill("5,0000" + rnd.Next(1, 10));
                         line_12B.Fill("12,0000" + rnd.Next(1, 10));
                         break;
                     case 6://12V кз
-                        usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
+                        usb.Fill(usb.V.Substring(0, 3) + rnd.Next(10, 100));
                         line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
                         line_5B.Fill("5,0000" + rnd.Next(1, 10));
                         break;
                     case 7://ОЗУ не работает
-                        usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
+                        usb.Fill(usb.V.Substring(0, 3) + rnd.Next(10, 100));
                         line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
                         line_5B.Fill("5,0000" + rnd.Next(1, 10));
                         line_12B.Fill("12,0000" + rnd.Next(1, 10));
                         break;
                     case 8://pci e тестер
-                        usb.Fill("0," + rnd.Next(4, 7) + rnd.Next(10, 100));
+                        usb.Fill(usb.V.Substring(0, 3) + rnd.Next(10, 100));
                         line_3_3B.Fill("3,3000" + rnd.Next(1, 10));
                         line_5B.Fill("5,0000" + rnd.Next(1, 10));
                         line_12B.Fill("12,0000" + rnd.Next(1, 10));
@@ -694,6 +699,35 @@ namespace ЭВМ
         {
             if (ToolsPages.SelectedItem is TabItem selectedTab)
             {
+                DownVoltageText.Text = "0,000";
+                volt_text.Text = "Падение напряжение(мВ)";
+                isGenering = false;
+                Array.Clear(compare, 0, compare.Length);
+                GndButton.Opacity = 0;
+                RtcButton.Opacity = 0;
+                BIOSButton.Opacity = 0;
+                GndUsb1_1.Opacity = 0;
+                GndUsb1_2.Opacity = 0;
+                Usb1_1.Opacity = 0;
+                Usb1_2.Opacity = 0;
+                Usb1_3.Opacity = 0;
+                Usb1_4.Opacity = 0;
+                V33_1.Opacity = 0;
+                V5_1.Opacity = 0;
+                V12_1.Opacity = 0;
+                Good_synk.Visibility = Visibility.Hidden;
+                Bad_synk.Visibility = Visibility.Hidden;
+                IsKz.Fill = Brushes.LightBlue;
+                Plus.IsHitTestVisible = true;
+                Minus.IsHitTestVisible = true;
+                Plus_o.IsHitTestVisible = true;
+                Minus_o.IsHitTestVisible = true;
+                Minus_o.IsChecked = false;
+                Plus_o.IsChecked = false;
+                Minus.IsChecked = false;
+                Plus.IsChecked = false;
+
+
                 current_page = $"{selectedTab.Header}";
                 MEM1.Opacity = 0;
                 MEM1.IsEnabled = true;
@@ -703,6 +737,12 @@ namespace ЭВМ
                 MEM3.IsEnabled = true;
                 MEM4.Opacity = 0;
                 MEM4.IsEnabled = true;
+                PCI_E1.Opacity = 0;
+                PCI_E1.IsEnabled = true;
+                PCI_E2.Opacity = 0;
+                PCI_E2.IsEnabled = true;
+
+
                 for (int j = 0; j < 407; j++)
                 {
                     Rectangle Rect_memory = (Rectangle)FindName("Rect_memory" + j);
@@ -809,8 +849,16 @@ namespace ЭВМ
             MagnifierPanel.Visibility = Visibility.Hidden;
             Good_synk.Visibility = Visibility.Hidden;
             Bad_synk.Visibility = Visibility.Hidden;
+            results.SelectedIndex = -1;  
+            isGenering = false;
+            isZoomed = false;
+            IsKz.Fill = Brushes.LightBlue;
+            Zoomer.Background = Brushes.LightGray;
+            Zoomer_o.Background = Brushes.LightGray;
             Begin.Visibility = Visibility.Visible;
             About.Visibility = Visibility.Visible;
+            ToolsPages.SelectedIndex= 0;
+            win.Visibility = Visibility.Hidden;
         }
     }
 
