@@ -556,7 +556,7 @@ namespace ЭВМ
             string Source = (string)((Button)e.OriginalSource).Content;
             string NumberString = Source.Substring(Source.Length-1);//образка названия кнопки, для выделения числа
             menu_num = int.Parse(NumberString);//преобразование в int
-            current_mode = rand.Next(1, 9);
+            current_mode = arr_of_brokes[menu_num-1];
             broke = brokes[current_mode - 1];
             current_page = "Осцилограф";
             AorusB450 = new MotherBoard(current_mode);
